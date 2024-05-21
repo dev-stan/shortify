@@ -4,10 +4,6 @@
 # SAMPLE VIDEO LINK
 # https://drive.google.com/uc?export=download&id=1gB53ZKM7FMFjGAyQKKTe5ld6nvNxhQIF
 
-
-
-
-
 # Step 2: Require the gem
 require "shotstack"
 require 'json'
@@ -16,6 +12,7 @@ require 'json'
 file = File.read('output.json')
 data_hash = JSON.parse(file)
 best_seconds = data_hash[0]['startMillis'] / 1000
+second_best = data_hash[1]['startMillis'] / 1000
 p best_seconds
 
 
@@ -28,16 +25,15 @@ end
 
 # Step 4: Trim the first video (clip1)
 video_asset1 = Shotstack::VideoAsset.new(
-  src: "https://drive.google.com/uc?export=download&id=1gB53ZKM7FMFjGAyQKKTe5ld6nvNxhQIF",
+  src: "https://f021-223-135-200-101.ngrok-free.app/assets/sample-a2392780362d05aa22d41765ba66ca56c7b32260b3ebe188d1b4c79eb14583ec.mp4",
   trim: best_seconds - 10
 )
 
 video_clip1 = Shotstack::Clip.new(
   asset: video_asset1,
   start: 0,
-  length: 5,
-  # Set the scale property to maintain a 9:16 aspect ratio
-  scale: 1.777  # Adjust this value based on the original video dimensions
+  length: second_best - best_seconds,
+  scale: 1.77
 )
 
 # Step 6: Add both clips to a track
@@ -52,8 +48,15 @@ timeline = Shotstack::Timeline.new(
 # Step 8: Set the video output specification
 output = Shotstack::Output.new(
   format: "mp4",
-  resolution: "sd"
+  resolution: "sd",
+  aspect_ratio: "9:16",
+  # fit: "cover"
+
 )
+
+# rent = Shotstack::Rendition.new(
+
+# )
 
 # Step 9: Create the video edit
 edit = Shotstack::Edit.new(
