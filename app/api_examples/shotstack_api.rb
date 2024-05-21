@@ -35,9 +35,8 @@ video_asset1 = Shotstack::VideoAsset.new(
 video_clip1 = Shotstack::Clip.new(
   asset: video_asset1,
   start: 0,
-  length: 5,
+  length: 10,
   # Set the scale property to maintain a 9:16 aspect ratio
-  scale: 1.777  # Adjust this value based on the original video dimensions
 )
 
 # Step 6: Add both clips to a track
