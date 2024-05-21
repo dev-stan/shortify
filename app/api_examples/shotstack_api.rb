@@ -28,7 +28,7 @@ end
 
 # Step 4: Trim the first video (clip1)
 video_asset1 = Shotstack::VideoAsset.new(
-  src: "https://drive.google.com/uc?export=download&id=1gB53ZKM7FMFjGAyQKKTe5ld6nvNxhQIF",
+  src: "https://f606-223-135-200-101.ngrok-free.app/assets/sample-a2392780362d05aa22d41765ba66ca56c7b32260b3ebe188d1b4c79eb14583ec.mp4",
   trim: best_seconds - 10
 )
 
