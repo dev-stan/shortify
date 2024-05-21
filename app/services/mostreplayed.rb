@@ -1,5 +1,5 @@
 class Mostreplayed
-  def initialize
-
+  def initialize(url)
+    @url = url
   end
 end
