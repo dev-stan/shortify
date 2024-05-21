@@ -7,6 +7,7 @@ class SourcesController < ApplicationController
   def show
     @user = current_user
     @source = Source.find(params[:id])
+    @output = Output.new
   end
 
   def create
@@ -17,7 +18,7 @@ class SourcesController < ApplicationController
       redirect_to source_path(@source)
       puts 'saved'
     else
-      render 'new', status: :unprocessable_entity
+      render 'pages/home', status: :unprocessable_entity
       puts 'not saved'
     end
   end
