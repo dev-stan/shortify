@@ -1,17 +1,15 @@
-<div class="home", style="height: calc(100vh - 66px)">
-  <div class="container">
-    <div class="top-content text-center pt-5">
-      <h1>Viral shorts with just a click</h1>
-      <p>Your first video in just a couple seconds</p>
-    </div>
-    <div class="go-to-new pt-5 text-center">
-      <%=render 'button', text: 'Start Creating' %>
-    </div>
-    <div class="examples d-flex justify-content-center", style="padding-top: 100px;">
-      <%=render 'examples_card'%>
-      <%=render 'examples_card'%>
-      <%=render 'examples_card'%>
-      <%=render 'examples_card'%>
-    </div>
+<div class="container">
+  <div class="top-content text-center pt-5">
+    <h1>Viral shorts with just a click</h1>
+    <p>Your first video in just a couple seconds</p>
+  </div>
+  <div class="go-to-new pt-5 text-center">
+    <%=render 'button', text: 'Start Creating', path: sources_path %>
+  </div>
+  <div class="examples d-flex justify-content-center", style="padding-top: 100px;">
+    <%=render 'examples_card'%>
+    <%=render 'examples_card'%>
+    <%=render 'examples_card'%>
+    <%=render 'examples_card'%>
   </div>
 </div>
