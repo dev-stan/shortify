@@ -1,26 +1,28 @@
 .examples_card {
   margin-left: 20px;
   margin-right: 20px;
-
-  .card-img {
-    height: 400px;
-    object-fit: cover;
-    border-radius: 16px;
-  }
-
-  .black-semi-bold {
-    color: black;
-    font-weight: 200;
-  }
-
-  .black-bold {
-    color: black;
-    font-weight: bold;
-  }
-
   position: relative;
-  .card {
-    overflow: hidden;
-  }
+}
 
+.examples_card .card {
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.examples_card .card-img,
+.examples_card video {
+  width: 200px; /* Ensure the video fills the width of its container */
+  height: 360px; /* Calculate height based on 9:16 aspect ratio */
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.examples_card .black-semi-bold {
+  color: black;
+  font-weight: 200;
+}
+
+.examples_card .black-bold {
+  color: black;
+  font-weight: bold;
 }
