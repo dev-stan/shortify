@@ -2,6 +2,7 @@ class SourcesController < ApplicationController
   def index
     @user = current_user
     @sources = Source.all
+    @output = Output.new
   end
 
   def show
