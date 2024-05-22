@@ -1,7 +1,7 @@
 class SourcesController < ApplicationController
   def index
     @user = current_user
-    @sources = @user.sources
+    @sources = Source.all
   end
 
   def show
@@ -13,7 +13,6 @@ class SourcesController < ApplicationController
   def create
     @owner = current_user
     @source = Source.new(source_params)
-    @source.user = @owner
     if @source.save
       redirect_to source_path(@source)
       puts 'saved'

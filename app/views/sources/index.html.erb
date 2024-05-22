@@ -1,6 +1,10 @@
 <h1>Your Sources:</h1>
-<% @sources.each do |source|%>
-<ul>
-  <li><%= link_to "#{source.url}", source_path(source) %></li>
-</ul>
+<% if @sources.count > 0 %>
+  <% @sources.each do |source|%>
+  <ul>
+    <li><%= link_to "#{source.url}", source_path(source) %></li>
+  </ul>
+  <% end %>
+<% else %>
+  <p>No sources</p>
 <% end %>
