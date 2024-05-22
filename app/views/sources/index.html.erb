@@ -1,19 +1,15 @@
-<h1>Video Sources:</h1>
-<% if @sources.count > 0 %>
-  <% @sources.each do |source|%>
-  <ul>
-    <li><%= link_to "#{source}", source_path(source) %></li>
-  </ul>
-  <% end %>
-<% else %>
-  <p>No sources</p>
-<% end %>
+<h1>Create a new Video:</h1>
 
 <%# CAROUSEL / LIST SOURCE VIDEOS %>
-<div class="card container w-30 mb-3">
-  <div class="d-flex justify-content-center">
+<div class="card container w-30 pb-4 mb-3">
+  <div class="go-to-new text-center">
     <h2>Select your Background Video:</h2>
-    <p><%= render "shared/carousel" %></p>
+  </div>
+  <div class="examples d-flex justify-content-center", style="padding-top: 10px;">
+    <%=render 'pages/examples_card'%>
+    <%=render 'pages/examples_card'%>
+    <%=render 'pages/examples_card'%>
+    <%=render 'pages/examples_card'%>
   </div>
 </div>
 
@@ -21,19 +17,48 @@
 <div class="card container">
 <h2>Give your video a script, and choose how you'd like it to look & sound:</h2>
 <%= simple_form_for [@source, @output] do |f| %>
-<div class="parent d-flex mt-2">
-  <div class="left d-flex flex-column w-50 p-1">
-    <%= f.input :script, :input_html => { 'rows' => 8 }  %>
+  <div class="parent d-flex mt-2">
+    <div class="left d-flex flex-column w-50 p-1">
+      <%= f.input :script, :input_html => { 'rows' => 8 }  %>
+    </div>
+    <div class="right d-flex flex-column w-50 p-1">
+  <%= f.input :font_size, as: :range %>
+  <%= f.input :font_family, collection: Output::FONTFAMILIES, include_blank: false%>
+  <%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false%>
+    </div>
   </div>
-  <div class="right d-flex flex-column w-50 p-1">
-<%= f.input :font_size, as: :range %>
-<%= f.input :font_family, collection: Output::FONTFAMILIES, include_blank: false%>
-<%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false%>
-  </div>
-</div>
 
-<%# GENERATE BUTTON / SEND FORM %>
-<%= f.submit %>
+  <%# GENERATE BUTTON / SEND FORM %>
+  <%= f.submit %>
 <% end %>
 
-<%# DISPLAY OUTPUT VIDEO %>
+<%# DISPLAY OUTPUT VIDEO ? %>
+<br>
+
+<div class="range-slider">
+  <input class="range-slider__range" type="range" value="100" min="0" max="500">
+  <span class="range-slider__value">0</span>
+</div>
+
+
+<script>
+  var rangeSlider = function(){
+  var slider = $('.range-slider'),
+      range = $('.range-slider__range'),
+      value = $('.range-slider__value');
+
+  slider.each(function(){
+
+    value.each(function(){
+      var value = $(this).prev().attr('value');
+      $(this).html(value);
+    });
+
+    range.on('input', function(){
+      $(this).next(value).html(this.value);
+    });
+  });
+};
+
+rangeSlider();
+</script>
