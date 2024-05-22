@@ -10,9 +10,30 @@
 <% end %>
 
 <%# CAROUSEL / LIST SOURCE VIDEOS %>
-
+<div class="card container w-30 mb-3">
+  <div class="d-flex justify-content-center">
+    <h2>Select your Background Video:</h2>
+    <p><%= render "shared/carousel" %></p>
+  </div>
+</div>
 
 <%# GIVE CUSTOMIZATION OPTIONS TO USER, SHOW GENERATE BUTTON%>
+<div class="card container">
+<h2>Give your video a script, and choose how you'd like it to look & sound:</h2>
+<%= simple_form_for [@source, @output] do |f| %>
+<div class="parent d-flex mt-2">
+  <div class="left d-flex flex-column w-50 p-1">
+    <%= f.input :script, :input_html => { 'rows' => 8 }  %>
+  </div>
+  <div class="right d-flex flex-column w-50 p-1">
+<%= f.input :font_size, as: :range %>
+<%= f.input :font_family, collection: Output::FONTFAMILIES, include_blank: false%>
+<%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false%>
+  </div>
+</div>
 
+<%# GENERATE BUTTON / SEND FORM %>
+<%= f.submit %>
+<% end %>
 
 <%# DISPLAY OUTPUT VIDEO %>
