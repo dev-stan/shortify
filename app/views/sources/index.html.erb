@@ -1,64 +1,41 @@
 <h1>Create a new Video:</h1>
 
 <%# CAROUSEL / LIST SOURCE VIDEOS %>
-<div class="card container w-30 pb-4 mb-3">
-  <div class="go-to-new text-center">
+<div class="container w-30 pb-4 mb-3">
     <h2>Select your Background Video:</h2>
-  </div>
   <div class="examples d-flex justify-content-center", style="padding-top: 10px;">
-    <%=render 'pages/examples_card'%>
-    <%=render 'pages/examples_card'%>
-    <%=render 'pages/examples_card'%>
-    <%=render 'pages/examples_card'%>
+    <%=render 'pages/examples_card', video_source: 'story-video-1.mp4'%>
+    <%=render 'pages/examples_card', video_source: 'story-video-2.mp4'%>
+    <%=render 'pages/examples_card', video_source: 'story-video-3.mp4'%>
+    <%=render 'pages/examples_card', video_source: 'story-video-4.mp4'%>
   </div>
 </div>
 
 <%# GIVE CUSTOMIZATION OPTIONS TO USER, SHOW GENERATE BUTTON%>
-<div class="card container">
+<div class="container text-white">
 <h2>Give your video a script, and choose how you'd like it to look & sound:</h2>
 <%= simple_form_for [@source, @output] do |f| %>
   <div class="parent d-flex mt-2">
     <div class="left d-flex flex-column w-50 p-1">
-      <%= f.input :script, :input_html => { 'rows' => 8 }  %>
+      <%= f.input :script, :input_html => { 'rows' => 10 }  %>
     </div>
     <div class="right d-flex flex-column w-50 p-1">
-  <%= f.input :font_size, as: :range %>
+<div class="range-slider">
+  Font Size: <output id="rangevalue">12</output>
+  <div>
+<%= f.input :font_size, label: false, as: :range, input_html:{ value: 12, min: 1, max: 50, oninput:"rangevalue.value=value",  class:"slider-input"} %>
+</div>
+</div>
+
   <%= f.input :font_family, collection: Output::FONTFAMILIES, include_blank: false%>
   <%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false%>
+  <%= f.input :voice, label:"Voice Selection", as: :radio_buttons, collection: [[1, 'Voice 1'], [2, 'Voice 2']], label_method: :second, value_method: :first %>
     </div>
   </div>
 
   <%# GENERATE BUTTON / SEND FORM %>
-  <%= f.submit %>
+ <div class="d-flex justify-content-center mb-3">
+ <%= f.button :submit, "Create Video", class: "main-button" %>
 <% end %>
-
-<%# DISPLAY OUTPUT VIDEO ? %>
-<br>
-
-<div class="range-slider">
-  <input class="range-slider__range" type="range" value="100" min="0" max="500">
-  <span class="range-slider__value">0</span>
 </div>
-
-
-<script>
-  var rangeSlider = function(){
-  var slider = $('.range-slider'),
-      range = $('.range-slider__range'),
-      value = $('.range-slider__value');
-
-  slider.each(function(){
-
-    value.each(function(){
-      var value = $(this).prev().attr('value');
-      $(this).html(value);
-    });
-
-    range.on('input', function(){
-      $(this).next(value).html(this.value);
-    });
-  });
-};
-
-rangeSlider();
-</script>
+<%# DISPLAY OUTPUT VIDEO ? %>

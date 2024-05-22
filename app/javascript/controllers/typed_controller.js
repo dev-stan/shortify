@@ -8,6 +8,5 @@ export default class extends Controller {
       strings: ['an Idea', 'Creativity', 'one Click'],
       typeSpeed: 50,
     });
-
   }
 }
