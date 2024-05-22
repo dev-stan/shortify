@@ -1,20 +1,18 @@
 <h1>Create a new Video:</h1>
 
 <%# CAROUSEL / LIST SOURCE VIDEOS %>
-<div class="card container w-30 pb-4 mb-3">
-  <div class="go-to-new text-center">
+<div class="container w-30 pb-4 mb-3">
     <h2>Select your Background Video:</h2>
-  </div>
   <div class="examples d-flex justify-content-center", style="padding-top: 10px;">
-    <%=render 'pages/examples_card'%>
-    <%=render 'pages/examples_card'%>
-    <%=render 'pages/examples_card'%>
-    <%=render 'pages/examples_card'%>
+    <%=render 'pages/examples_card', video_source: 'story-video-1.mp4'%>
+    <%=render 'pages/examples_card', video_source: 'story-video-2.mp4'%>
+    <%=render 'pages/examples_card', video_source: 'story-video-3.mp4'%>
+    <%=render 'pages/examples_card', video_source: 'story-video-4.mp4'%>
   </div>
 </div>
 
 <%# GIVE CUSTOMIZATION OPTIONS TO USER, SHOW GENERATE BUTTON%>
-<div class="card container">
+<div class="container text-white">
 <h2>Give your video a script, and choose how you'd like it to look & sound:</h2>
 <%= simple_form_for [@source, @output] do |f| %>
   <div class="parent d-flex mt-2">
@@ -36,7 +34,8 @@
   </div>
 
   <%# GENERATE BUTTON / SEND FORM %>
-  <%= f.submit %>
+ <div class="d-flex justify-content-center mb-3">
+ <%= f.button :submit, "Create Video", class: "main-button" %>
 <% end %>
-
+</div>
 <%# DISPLAY OUTPUT VIDEO ? %>
