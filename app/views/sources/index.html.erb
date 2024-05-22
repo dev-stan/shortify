@@ -2,7 +2,7 @@
 <% if @sources.count > 0 %>
   <% @sources.each do |source|%>
   <ul>
-    <li><%= link_to "#{source.url}", source_path(source) %></li>
+    <li><%= link_to "#{source}", source_path(source) %></li>
   </ul>
   <% end %>
 <% else %>
