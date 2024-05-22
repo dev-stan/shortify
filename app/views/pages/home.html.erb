@@ -1,9 +1,17 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-
-<% if user_signed_in? %>
-<p>Get Started by adding a source video:</p>
-<%= link_to "Create new Video", sources_path %>
-<% else %>
-<p>Sign up and get started!</p>
-<% end %>
+<div class="home", style="height: calc(100vh - 66px)">
+  <div class="container">
+    <div class="top-content text-center pt-5">
+      <h1>Viral shorts with just a click</h1>
+      <p>Your first video in just a couple seconds</p>
+    </div>
+    <div class="go-to-new pt-5 text-center">
+      <%=render 'button', text: 'Start Creating' %>
+    </div>
+    <div class="examples d-flex justify-content-center", style="padding-top: 100px;">
+      <%=render 'examples_card'%>
+      <%=render 'examples_card'%>
+      <%=render 'examples_card'%>
+      <%=render 'examples_card'%>
+    </div>
+  </div>
+</div>
