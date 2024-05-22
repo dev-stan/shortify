@@ -20,10 +20,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_22_061954) do
     t.string "url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "font_family"
-    t.string "font_style"
-    t.integer "font_size"
     t.text "script"
+    t.integer "font_size"
+    t.string "font_style"
+    t.string "font_family"
     t.integer "voice"
     t.index ["source_id"], name: "index_outputs_on_source_id"
     t.index ["user_id"], name: "index_outputs_on_user_id"
