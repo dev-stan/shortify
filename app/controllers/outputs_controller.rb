@@ -2,6 +2,7 @@ class OutputsController < ApplicationController
 
   def new
     @output = Output.new
+    @user = current_user
   end
 
   def create
