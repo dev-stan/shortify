@@ -1,6 +1,4 @@
 class Source < ApplicationRecord
-  belongs_to :user
-
   # validates :url, format: { with: /\Ahttps?:\/\/[\w\d\-.]+\.[a-z]+\z/i,
   # message: 'must be a valid URL' }
 

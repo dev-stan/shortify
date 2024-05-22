@@ -1,6 +1,18 @@
-<h1>Your Sources:</h1>
-<% @sources.each do |source|%>
-<ul>
-  <li><%= link_to "#{source.url}", source_path(source) %></li>
-</ul>
+<h1>Video Sources:</h1>
+<% if @sources.count > 0 %>
+  <% @sources.each do |source|%>
+  <ul>
+    <li><%= link_to "#{source}", source_path(source) %></li>
+  </ul>
+  <% end %>
+<% else %>
+  <p>No sources</p>
 <% end %>
+
+<%# CAROUSEL / LIST SOURCE VIDEOS %>
+
+
+<%# GIVE CUSTOMIZATION OPTIONS TO USER, SHOW GENERATE BUTTON%>
+
+
+<%# DISPLAY OUTPUT VIDEO %>
