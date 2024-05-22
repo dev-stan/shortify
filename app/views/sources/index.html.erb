@@ -19,12 +19,19 @@
 <%= simple_form_for [@source, @output] do |f| %>
   <div class="parent d-flex mt-2">
     <div class="left d-flex flex-column w-50 p-1">
-      <%= f.input :script, :input_html => { 'rows' => 8 }  %>
+      <%= f.input :script, :input_html => { 'rows' => 10 }  %>
     </div>
     <div class="right d-flex flex-column w-50 p-1">
-  <%= f.input :font_size, as: :range %>
+<div class="range-slider">
+  Font Size: <output id="rangevalue">12</output>
+  <div>
+<%= f.input :font_size, label: false, as: :range, input_html:{ value: 12, min: 1, max: 50, oninput:"rangevalue.value=value",  class:"slider-input"} %>
+</div>
+</div>
+
   <%= f.input :font_family, collection: Output::FONTFAMILIES, include_blank: false%>
   <%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false%>
+  <%= f.input :voice, label:"Voice Selection", as: :radio_buttons, collection: [[1, 'Voice 1'], [2, 'Voice 2']], label_method: :second, value_method: :first %>
     </div>
   </div>
 
@@ -33,32 +40,3 @@
 <% end %>
 
 <%# DISPLAY OUTPUT VIDEO ? %>
-<br>
-
-<div class="range-slider">
-  <input class="range-slider__range" type="range" value="100" min="0" max="500">
-  <span class="range-slider__value">0</span>
-</div>
-
-
-<script>
-  var rangeSlider = function(){
-  var slider = $('.range-slider'),
-      range = $('.range-slider__range'),
-      value = $('.range-slider__value');
-
-  slider.each(function(){
-
-    value.each(function(){
-      var value = $(this).prev().attr('value');
-      $(this).html(value);
-    });
-
-    range.on('input', function(){
-      $(this).next(value).html(this.value);
-    });
-  });
-};
-
-rangeSlider();
-</script>
