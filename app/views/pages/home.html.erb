@@ -1,5 +1,14 @@
-<div class="container">
-  <h1>Viral shorts with just a click</h1>
-  <p>Your first video in just a couple seconds</p>
-  <%= link_to 'Start Creating', '#', class: "btn  btn-primary"%>
+<div class="home", style="height: calc(100vh - 66px)">
+  <div class="container">
+    <div class="top-content text-center">
+      <h1>Viral shorts with just a click</h1>
+      <p>Your first video in just a couple seconds</p>
+      <%= link_to 'Start Creating', '#', class: "btn  btn-primary"%>
+    </div>
+    <div class="examples d-flex ">
+      <%=render 'examples_card'%>
+      <%=render 'examples_card'%>
+      <%=render 'examples_card'%>
+    </div>
+  </div>
 </div>

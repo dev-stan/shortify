@@ -1,0 +1,25 @@
+.examples_card {
+
+  .card-img {
+    height: 300px;
+    object-fit: cover;
+  }
+
+  .black-semi-bold {
+    color: black;
+    font-weight: 200;
+  }
+
+  .black-bold {
+    color: black;
+    font-weight: bold;
+  }
+  p {
+    color: rgb(62, 62, 62);
+  }
+  position: relative;
+  .card {
+    overflow: hidden;
+  }
+
+}
