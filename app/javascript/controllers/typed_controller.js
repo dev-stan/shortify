@@ -3,12 +3,10 @@ import Typed from 'typed.js';
 
 // Connects to data-controller="typed"
 export default class extends Controller {
-
-
   connect() {
     const typed = new Typed(this.element, {
-      strings: ['Idea', 'App', 'Click'],
-      typeSpeed: 150,
+      strings: ['an Idea', 'Creativity', 'one Click'],
+      typeSpeed: 50,
     });
   }
 }
