@@ -1,0 +1,6 @@
+<h1>Your Videos:</h1>
+
+<% @outputs.each do |output|%>
+<ul>
+  <li><%= link_to "#{output}", output_path(output)%></li>
+</ul>
