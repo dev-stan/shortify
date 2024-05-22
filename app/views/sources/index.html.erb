@@ -1,20 +1,38 @@
 <h1>Create a new Video:</h1>
+<%= simple_form_for [@source, @output] do |f| %>
 
 <%# CAROUSEL / LIST SOURCE VIDEOS %>
-<div class="container w-30 pb-4 mb-3">
+<div class="container w-30 pb-4 mb-3 text-white">
     <h2>Select your Background Video:</h2>
-  <div class="examples d-flex justify-content-center", style="padding-top: 10px;">
-    <%=render 'pages/examples_card', video_source: 'story-video-1.mp4'%>
-    <%=render 'pages/examples_card', video_source: 'story-video-2.mp4'%>
-    <%=render 'pages/examples_card', video_source: 'story-video-3.mp4'%>
-    <%=render 'pages/examples_card', video_source: 'story-video-4.mp4'%>
+    <br>
+<%# <%= f.input :source, as: :radio_buttons, collection: [[1, 'Video 1'], [2, 'Video 2'], [3, 'Video 3'], [4, 'Video 4']]%>
+
+<fieldset class="form-group radio_buttons required snippet_category">
+  <div class="category-wrapper">
+    <input type="hidden" name="output[source_id]" value="">
+    <div class="category-item">
+      <input class="form-check-input radio_buttons required category-selector" data-style="ruby" type="radio" value="1" name="output[source_id]" id="snippet_category_id_1">
+      <label class="form-check-label collection_radio_buttons" for="snippet_category_id_1"><%=render 'pages/examples_card', video_source: 'story-video-1.mp4'%></label>
+    </div>
+    <div class="category-item">
+      <input class="form-check-input radio_buttons required category-selector" data-style="ruby" type="radio" value="2" name="output[source_id]" id="snippet_category_id_2">
+      <label class="form-check-label collection_radio_buttons" for="snippet_category_id_2"><%=render 'pages/examples_card', video_source: 'story-video-2.mp4'%></label>
+    </div>
+  <div class="category-item">
+      <input class="form-check-input radio_buttons required category-selector" data-style="ruby" type="radio" value="3" name="output[source_id]" id="snippet_category_id_3">
+      <label class="form-check-label collection_radio_buttons" for="snippet_category_id_3"><%=render 'pages/examples_card', video_source: 'story-video-3.mp4'%></label>
+    </div>
+  <div class="category-item">
+      <input class="form-check-input radio_buttons required category-selector" data-style="ruby" type="radio" value="4" name="output[source_id]" id="snippet_category_id_4">
+      <label class="form-check-label collection_radio_buttons" for="snippet_category_id_4"><%=render 'pages/examples_card', video_source: 'story-video-4.mp4'%></label>
+    </div>
   </div>
+</fieldset>
 </div>
 
 <%# GIVE CUSTOMIZATION OPTIONS TO USER, SHOW GENERATE BUTTON%>
 <div class="container text-white">
 <h2>Give your video a script, and choose how you'd like it to look & sound:</h2>
-<%= simple_form_for [@source, @output] do |f| %>
   <div class="parent d-flex mt-2">
     <div class="left d-flex flex-column w-50 p-1">
       <%= f.input :script, :input_html => { 'rows' => 10 }  %>
@@ -29,13 +47,28 @@
 
   <%= f.input :font_family, collection: Output::FONTFAMILIES, include_blank: false%>
   <%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false%>
-  <%= f.input :voice, label:"Voice Selection", as: :radio_buttons, collection: [[1, 'Voice 1'], [2, 'Voice 2']], label_method: :second, value_method: :first %>
+  <%# <%= f.input :voice, label:"Voice Selection", as: :radio_buttons, collection: [[1, 'Voice 1'], [2, 'Voice 2']], label_method: :second, value_method: :first %>
+
+  <fieldset class="form-group radio_buttons required snippet_category">
+  <div class="voice-wrapper">
+    <input type="hidden" name="output[source_id]" value="">
+    <div class="voice-item">
+      <input class="form-check-input radio_buttons required voice-selector" type="radio" value="1" name="output[source_id]" id="voice_category_id_1">
+      <label class="form-check-label collection_radio_buttons" for="voice_category_id_1">Voice 1</label>
+    </div>
+    <div class="voice-item">
+      <input class="form-check-input radio_buttons required voice-selector" type="radio" value="2" name="output[source_id]" id="voice_category_id_2">
+      <label class="form-check-label collection_radio_buttons" for="voice_category_id_2">Voice 2</label>
+    </div>
+  </div>
+</fieldset>
+
     </div>
   </div>
 
   <%# GENERATE BUTTON / SEND FORM %>
  <div class="d-flex justify-content-center mb-3">
- <%= f.button :submit, "Create Video", class: "main-button" %>
+ <%= f.button :submit, "Create Video", class: "btn btn-secondary rounded-pill p-2 px-4" %>
 <% end %>
 </div>
 <%# DISPLAY OUTPUT VIDEO ? %>
