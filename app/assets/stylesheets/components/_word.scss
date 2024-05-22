@@ -1,0 +1,33 @@
+.top-content h1 {
+  position: relative;
+  display: inline-block;
+}
+
+.word {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.word.in {
+  opacity: 1;
+}
+
+.letter {
+  display: inline-block;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.letter.in {
+  opacity: 1;
+}
+
+.letter.out {
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.letter.behind {
+  opacity: 0;
+}
