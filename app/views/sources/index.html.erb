@@ -71,4 +71,12 @@
  <%= f.button :submit, "Create Video", class: "btn btn-secondary rounded-pill p-2 px-4" %>
 <% end %>
 </div>
+
 <%# DISPLAY OUTPUT VIDEO ? %>
+<% @sources.each do  |source| %>
+<div class="card">
+<%= source %>
+<%= source.url %>
+<%=render 'pages/examples_card', video_source: "#{source.url}"%>
+</div>
+<% end %>
