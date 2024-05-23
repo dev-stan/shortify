@@ -1,0 +1,60 @@
+.examples_card {
+  margin-left: 20px;
+  margin-right: 20px;
+  position: relative;
+  transition: all 1500ms ease; /* Apply transition to the main button state */
+}
+
+.examples_card .card {
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.examples_card .card-img,
+.examples_card video {
+  width: 200px; /* Ensure the video fills the width of its container */
+  height: 360px; /* Calculate height based on 9:16 aspect ratio */
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.examples_card .black-semi-bold {
+  color: black;
+  font-weight: 200;
+}
+
+.examples_card .black-bold {
+  color: black;
+  font-weight: bold;
+}
+
+/* GOING TO HIJACK / DUPLICATE ABOVE, TWEAKING FOR ACTUAL CARDS*/
+
+.source_card {
+  position: relative;
+  transition: all 1500ms ease; /* Apply transition to the main button state */
+}
+
+.source_card .card {
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.source_card .card-img,
+.source_card video {
+  width: 200px; /* Ensure the video fills the width of its container */
+  height: 360px; /* Calculate height based on 9:16 aspect ratio */
+  border-radius: 6px;
+  object-fit: cover;
+
+}
+
+.source_card .black-semi-bold {
+  color: black;
+  font-weight: 200;
+}
+
+.source_card .black-bold {
+  color: black;
+  font-weight: bold;
+}
