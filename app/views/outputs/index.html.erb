@@ -1,6 +1,8 @@
 <h1>Your Videos:</h1>
-<% @sources.each do |source|%>
-  <ul>
-    <%= render 'output_card', source: source.video.key %>
-  </ul>
-<% end %>
+<div class="d-flex">
+  <% @sources.each do |source|%>
+    <ul>
+      <%= render 'output_card', source: source.video.key %>
+    </ul>
+  <% end %>
+</div>
