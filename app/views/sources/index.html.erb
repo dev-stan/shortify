@@ -10,22 +10,16 @@
 <fieldset class="form-group radio_buttons required snippet_category">
   <div class="category-wrapper">
     <input type="hidden" name="output[source_id]" value="">
+  <% @sources.each do |source| %>
     <div class="category-item">
       <input class="form-check-input radio_buttons required category-selector" data-style="ruby" type="radio" value="1" name="output[source_id]" id="snippet_category_id_1">
-      <label class="form-check-label collection_radio_buttons" for="snippet_category_id_1"><%=render 'pages/examples_card', video_source: 'story-video-1.mp4'%></label>
+      <label class="form-check-label collection_radio_buttons" for="snippet_category_id_1"><%=render 'pages/source_card', video_source: source.location%></label>
     </div>
-    <div class="category-item">
-      <input class="form-check-input radio_buttons required category-selector" data-style="ruby" type="radio" value="2" name="output[source_id]" id="snippet_category_id_2">
-      <label class="form-check-label collection_radio_buttons" for="snippet_category_id_2"><%=render 'pages/examples_card', video_source: 'story-video-2.mp4'%></label>
-    </div>
-  <div class="category-item">
-      <input class="form-check-input radio_buttons required category-selector" data-style="ruby" type="radio" value="3" name="output[source_id]" id="snippet_category_id_3">
-      <label class="form-check-label collection_radio_buttons" for="snippet_category_id_3"><%=render 'pages/examples_card', video_source: 'story-video-3.mp4'%></label>
-    </div>
-  <div class="category-item">
-      <input class="form-check-input radio_buttons required category-selector" data-style="ruby" type="radio" value="4" name="output[source_id]" id="snippet_category_id_4">
-      <label class="form-check-label collection_radio_buttons" for="snippet_category_id_4"><%=render 'pages/examples_card', video_source: 'story-video-4.mp4'%></label>
-    </div>
+<% end %>
+
+
+
+
   </div>
 </fieldset>
 </div>
@@ -67,16 +61,3 @@
   </div>
 
   <%# GENERATE BUTTON / SEND FORM %>
- <div class="d-flex justify-content-center mb-3">
- <%= f.button :submit, "Create Video", class: "btn btn-secondary rounded-pill p-2 px-4" %>
-<% end %>
-</div>
-
-<%# DISPLAY OUTPUT VIDEO ? %>
-<% @sources.each do  |source| %>
-<div class="card">
-<%= source %>
-<%= source.url %>
-<%=render 'pages/examples_card', video_source: "#{source.url}"%>
-</div>
-<% end %>
