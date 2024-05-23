@@ -1,0 +1,22 @@
+.output_card {
+  margin-left: 20px;
+  margin-right: 20px;
+  position: relative;
+  transition: all 1500ms ease; /* Apply transition to the main button state */
+
+  video {
+    width: 200px; /* Ensure the video fills the width of its container */
+    height: 360px; /* Calculate height based on 9:16 aspect ratio */
+    object-fit: cover;
+    border-radius: 16px;
+  }
+
+  .button_container {
+    display: flex;
+    margin-top: 10px; /* Add some space between the video and the buttons */
+
+    .btn {
+      margin-right: 10px; /* Optional: Add space between buttons */
+    }
+  }
+}
