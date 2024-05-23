@@ -1,4 +1,8 @@
 class OutputsController < ApplicationController
+def index
+  @user = current_user
+  @outputs = @user.outputs
+end
 
   def new
     @output = Output.new
