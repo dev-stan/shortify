@@ -1,9 +1,17 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# db/seeds.rb
+
+# Clear existing data to avoid duplicates (optional, but recommended in development)
+Source.delete_all
+puts 'Deleted all sources'
+
+videos = ['source-1', 'source-2', 'source-3']
+
+# Create new Source instances and attach videos
+videos.each_with_index do |video, index|
+  source = Source.new(url: 'hello', location: 'world')
+  source.video.attach(io: File.open("app/assets/images/#{video}.mp4"), filename: "#{video}.mp4", content_type: 'video/mp4')
+  source.save!
+  puts "Seeded Source ##{index + 1} with video #{video}"
+end
+
+puts "Created #{videos.size} sources with url 'hello', location 'world', and attached videos"
