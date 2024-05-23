@@ -5,6 +5,8 @@
   .button {
     width: 10%;
     height: 40px;
+    border: 2px #6D4DFF;
+    font-weight: bold;
     border-radius: 12px;
     background: white!important;
     color: #6D4DFF;
@@ -12,11 +14,30 @@
     text-decoration: none;
     margin: 5px;
     transition: all 1500ms ease;
+      &:hover {
+        transition-duration: 500ms;
+        box-shadow: 0px 0px 30px 15px rgba(98, 47, 253, 0.6); /* Larger white shadow with 60% opacity */
+    }
   }
 
-  .button:hover {
-    box-shadow: 0px 0px 8px 4px rgba(255, 255, 255, 0.6);
+  .button2 {
+    width: 10%;
+    height: 40px;
+    border: 2px #6D4DFF;
+    font-weight: bold;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0)!important;
+    color: #6D4DFF;
+    padding: 10px 30px 10px 30px;
+    text-decoration: none;
+    margin: 5px;
+    transition: all 1500ms ease;
+      &:hover {
+        transition-duration: 500ms;
+        color: #d1caf2;
+    }
   }
+
   a {
     color: white;
     font-weight: 500;
@@ -28,5 +49,17 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  width: 220px;
+}
+
+.unique-class {
+  background-color: white;
+  color: #ba3bd0;
+  border: #ba3bd0 2px;
+  border-radius: 8px;
+
+  &:hover {
+    transition-duration: 500ms;
+    transform: scale(1.1);
+  }
 }
