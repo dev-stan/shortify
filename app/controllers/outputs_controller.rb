@@ -16,9 +16,11 @@ end
         if @output.save
       redirect_to sources_path
       puts 'saved'
+      flash.notice = "Output created."
     else
       render 'pages/home', status: :unprocessable_entity
       puts 'not saved'
+      flash.alert = "Output failed."
     end
   end
 
