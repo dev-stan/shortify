@@ -327,8 +327,8 @@ DEPENDENCIES
   bootsnap
   bootstrap (~> 5.2)
   capybara
-  curl (~> 0.0.9)
   cloudinary
+  curl (~> 0.0.9)
   debug
   devise
   dotenv-rails
