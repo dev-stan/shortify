@@ -12,7 +12,6 @@ Source.destroy_all
 
 puts "Creating Source"
 ns = Source.create!
-ns.url = "https://drive.google.com/file/d/1zdDc04gdwuutjsUqqOVZBKR_C947wi5q/preview"
-ns.location = "story-video-1.mp4"
+ns.video.attach(io: File.open('app/assets/images/story-video-3.mp4'), filename: 'story-video-3.mp4', content_type: 'video/mp4')
 ns.save
 puts "Source created"
