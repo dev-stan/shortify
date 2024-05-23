@@ -25,7 +25,7 @@ sleep 5
 result = RestClient.get "https://api.shotstack.io/create/stage/assets/#{audio_id}",
 headers
 result_mp3 = JSON.parse(result)
-p mp3_url = result_mp3['data']['attributes']['url']
+p result_mp3['data']['attributes']['url']
 # asset_url = 'https%3A%2F%2Fshotstack-create-api-stage-assets.s3.amazonaws.com%2Fchre458jq2%2F01hyf-qjm92-96c65-8hcxh-cb46x0.mp3' #response_url['data']['attributes']['url'].gsub('/', '%2F').gsub(':', '%3A')
 # sleep 5
 # inspected_result = RestClient.get "https://api.shotstack.io/stage/probe/#{asset_url}", headers
