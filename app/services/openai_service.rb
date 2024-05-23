@@ -13,7 +13,7 @@ class OpenaiService
     @source_url = source_url
     @script = script
     @client = OpenAI::Client.new(
-      access_token: "OPENAI_ACCESS_TOKEN",
+      access_token: "sk-proj-50qdK8wdXNEsEwAaXxP3T3BlbkFJhSkSbZugimCmrCAae6K7",
       log_errors: true # Highly recommended in development, so you can see what errors OpenAI is returning. Not recommended in production.
     )
   end
