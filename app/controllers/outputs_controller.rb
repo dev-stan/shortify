@@ -11,15 +11,18 @@ end
   end
 
   def create
-    @output = Output.new
-    @owner = current_user
-    @source = Source.find(params[:id])
-    if @output.save
-      redirect_to source_path(@source)
+    @output = Output.new(output_params)
+    @output.user = current_user
+        if @output.save
+      redirect_to sources_path
       puts 'saved'
     else
       render 'pages/home', status: :unprocessable_entity
       puts 'not saved'
     end
+  end
+
+  def output_params
+    params.require(:output).permit(:source_id, :font_family, :font_style, :font_size, :script, :voice)
   end
 end
