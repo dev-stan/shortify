@@ -1,0 +1,41 @@
+.main-button {
+
+
+  width: 10%;
+  height: 40px;
+  border-radius: 12px;
+  background: #6D4DFF!important;
+  color: white;
+  padding: 10px 30px 10px 30px;
+  text-decoration: none;
+  margin: 5px;
+  transition: all 1500ms ease; /* Apply transition to the main button state */
+}
+
+.main-button:hover {
+  width: 12%;
+  height: 45px;
+  border-radius: 12px;
+  background: #5c37ff !important;
+  color: white;
+  padding: 10px 30px;
+  text-decoration: none;
+  margin: 5px;
+  box-shadow: 0px 0px 40px 20px rgba(98, 47, 253, 0.6); /* Larger white shadow with 60% opacity */
+}
+
+.nav-button {
+  width: 80px;
+  height: 30px;
+  border-radius: 12px;
+  background: #ffffff!important;
+  padding: 10px 30px 10px 30px;
+  text-decoration: none;
+  margin: 5px;
+  color: #6D4DFF;
+
+  a {
+    color: #6D4DFF;
+  }
+
+}

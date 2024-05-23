@@ -1,0 +1,6 @@
+<h1>Your Videos:</h1>
+<div class="container d-flex mb-6">
+  <% @outputs.each do |output|%>
+    <%= render 'output_card', source: output.source.video.key %>
+  <% end %>
+</div>
