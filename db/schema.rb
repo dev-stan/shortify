@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_24_015002) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_23_034447) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_015002) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "script"
+    t.integer "font_size"
+    t.string "font_style"
+    t.string "font_family"
     t.integer "voice"
     t.string "font_family"
     t.string "font_style"
