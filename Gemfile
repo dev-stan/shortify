@@ -46,7 +46,6 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 gem "ruby-openai"
-gem "dotenv-rails" # if you don't have it already
 gem "bootstrap", "~> 5.2"
 gem "devise"
 gem "autoprefixer-rails"
