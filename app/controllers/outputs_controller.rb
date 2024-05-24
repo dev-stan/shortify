@@ -12,8 +12,7 @@ end
 
   def create
     @output = Output.new(output_params)
-    @output.url = GenerateVideo.new('https://drive.google.com/uc?export=download&id=181aL20cO8Jvvpz4MtWvvyEoysQjyZUdh', @output.script).final_video_link
-    @output.source = 'https://drive.google.com/uc?export=download&id=181aL20cO8Jvvpz4MtWvvyEoysQjyZUdh'
+    @output.url = GenerateVideo.new(@output.source.url, @output.script).final_video_link
     @output.user = current_user
         if @output.save
       redirect_to sources_path
@@ -29,7 +28,7 @@ end
   end
 
   def output_params
-    params.require(:output).permit(:script, :font_family, :font_style, :voice)
+    # params.require(:output).permit(:script, :font_family, :font_style, :voice)
     params.require(:output).permit(:source_id, :font_family, :font_style, :font_size, :script, :voice)
   end
 end
