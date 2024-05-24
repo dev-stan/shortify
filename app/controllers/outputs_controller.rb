@@ -30,5 +30,6 @@ end
 
   def output_params
     params.require(:output).permit(:script, :font_family, :font_style, :voice)
+    params.require(:output).permit(:source_id, :font_family, :font_style, :font_size, :script, :voice)
   end
 end

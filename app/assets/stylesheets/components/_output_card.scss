@@ -19,4 +19,34 @@
       margin-right: 10px; /* Optional: Add space between buttons */
     }
   }
+
+  .link {
+    text-decoration: none;
+    font-size: 24px;
+    border: none;
+    margin-inline: 8px;
+    color: rgb(103, 103, 103);
+  }
+    .yt {
+      &:hover {
+        color: red;
+        transition-duration: 500ms;
+        text-shadow: 1px 1px 10px rgba(253, 47, 47, 0.6);
+      }
+    }
+    .insta {
+      &:hover {
+        color: rgb(187, 0, 255);
+        transition-duration: 500ms;
+        text-shadow: 1px 1px 10px rgba(143, 16, 145, 0.6);
+      }
+    }
+    .tiktok {
+      &:hover {
+        color: rgb(0, 255, 242);
+        transition-duration: 500ms;
+        text-shadow: 1px 1px 10px rgba(44, 139, 126, 0.6);
+      }
+    }
+  }
 }
