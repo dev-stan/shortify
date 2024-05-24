@@ -17,3 +17,8 @@ videos.each_with_index do |video, index|
 end
 
 puts "Created #{videos.size} and attached videos"
+
+
+
+video.attach(io: 'https://res.cloudinary.com/dcug1pvpk/video/upload/v1716529190/lazyreel-seeds/story-video-1.mp4', filename: "#{video}.mp4", content_type: 'video/mp4')
+
