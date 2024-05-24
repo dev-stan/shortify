@@ -46,6 +46,7 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 gem "ruby-openai"
+gem "dotenv-rails" # if you don't have it already
 gem "bootstrap", "~> 5.2"
 gem "devise"
 gem "autoprefixer-rails"
@@ -53,6 +54,7 @@ gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem 'curl', '~> 0.0.9'
+gem 'rest-client'
 
 group :development, :test do
   gem "dotenv-rails"

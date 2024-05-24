@@ -1,6 +1,6 @@
 # db/seeds.rb
 
-# Clear existing data to avoid duplicates (optional, but recommended in development)
+Source.delete_all
 Output.destroy_all
 Source.destroy_all
 puts 'Deleted all sources'
