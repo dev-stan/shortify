@@ -13,13 +13,13 @@ class GenerateVideo
     @source_url = source_url
     @script = script
     @client = OpenAI::Client.new(
-      access_token: $OPENAI_ACCESS_TOKEN,
+      access_token: ENV['OPENAI_ACCESS_TOKEN'],
       log_errors: true # Highly recommended in development, so you can see what errors OpenAI is returning. Not recommended in production.
     )
     @headers = {
       'Content-Type' => 'application/json',
       'Accept' => 'application/json',
-      'x-api-key' => 'u9MgtKJAMx0HFO6lAHNY2sqCbW7hQ40khGd47NPC'
+      'x-api-key' => ENV['SHOTSTACK_API']
       }
 
   end
