@@ -21,6 +21,7 @@ class GenerateVideo
       'Accept' => 'application/json',
       'x-api-key' => 'u9MgtKJAMx0HFO6lAHNY2sqCbW7hQ40khGd47NPC'
       }
+
   end
 
   def final_video_link
@@ -108,6 +109,7 @@ class GenerateVideo
         return edited_video_url
       end
     end
+
   end
 
   def call_whisper(mp3_url)
@@ -154,11 +156,13 @@ class GenerateVideo
       }
     }.to_json, @headers)
 
+
     audio_response = JSON.parse(result_audio)
     p audio_id = audio_response['data']['id']
     sleep 5
     result = RestClient.get "https://api.shotstack.io/create/stage/assets/#{audio_id}",
     @headers
+
     result_mp3 = JSON.parse(result)
     p mp3_url = result_mp3['data']['attributes']['url']
     return mp3_url
