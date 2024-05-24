@@ -6,22 +6,25 @@ require 'tempfile'
 require "json"
 require 'rest-client'
 
-class OpenaiService
+class GenerateVideo
   attr_reader :client
 
   def initialize(source_url, script)
     @source_url = source_url
     @script = script
     @client = OpenAI::Client.new(
-      access_token: "sk-proj-50qdK8wdXNEsEwAaXxP3T3BlbkFJhSkSbZugimCmrCAae6K7",
+      access_token: $OPENAI_ACCESS_TOKEN,
       log_errors: true # Highly recommended in development, so you can see what errors OpenAI is returning. Not recommended in production.
     )
   end
 
   def final_video_link
+    p 'creating mp3'
     @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
+    p 'creating subtitle'
     subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
-    generate_video(subtitles)  # Generate video with the obtained subtitles
+    p 'creating video'
+    generate_video(subtitles)  # Generate video with the obtained
   end
 
 
@@ -83,19 +86,20 @@ class OpenaiService
       "output": {
         "format": "mp4",
         "resolution": "hd",
-        "aspectRatio": "16:9"
+        "aspectRatio": "9:16"
       }
     }
 
-    create_video = RestClient.post('https://api.shotstack.io/edit/stage/render/',
+    p create_video = RestClient.post('https://api.shotstack.io/edit/stage/render/',
     result.to_json, headers)
-    video_response = JSON.parse(create_video)
-    video_id = video_response['response']['id']
+
+    p video_response = JSON.parse(create_video)
+    p video_id = video_response['response']['id']
     sleep 10
-    get_video = RestClient.get "https://api.shotstack.io/edit/stage/render/#{video_id}",
-    headers
-    result_mp4 = JSON.parse(get_video)
+    p get_video = RestClient.get( "https://api.shotstack.io/edit/stage/render/#{video_id}", headers)
+    p result_mp4 = JSON.parse(get_video)
     edited_video_url = result_mp4['response']['url']
+    p edited_video_url
     return edited_video_url
 
   end
@@ -106,7 +110,8 @@ class OpenaiService
     mp3_data = URI.open(mp3_url).read
 
     # Write mp3 data to a temporary file
-    Tempfile.create(['audio', '.mp3']) do |file|
+    Tempfile.create(['audio', '.mp3'], encoding: 'binary') do |file|
+      file.binmode # Ensure the file is in binary mode
       file.write(mp3_data)
       file.rewind
 
@@ -133,7 +138,7 @@ class OpenaiService
     headers = {
     'Content-Type' => 'application/json',
     'Accept' => 'application/json',
-    'x-api-key' => 'Xpcjv0luOmE8IelRPkaWe1NHhFeoRjj75YFn3kVF'
+    'x-api-key' => 'X6zia9cUxDFuPbDfWrG1B7iyJSnbgbqfpOHaD299'
     }
 
     result_audio = RestClient.post('https://api.shotstack.io/create/stage/assets',
@@ -149,12 +154,12 @@ class OpenaiService
     }.to_json, headers)
 
     audio_response = JSON.parse(result_audio)
-    audio_id = audio_response['data']['id']
+    p audio_id = audio_response['data']['id']
     sleep 5
     result = RestClient.get "https://api.shotstack.io/create/stage/assets/#{audio_id}",
     headers
     result_mp3 = JSON.parse(result)
-    mp3_url = result_mp3['data']['attributes']['url']
+    p mp3_url = result_mp3['data']['attributes']['url']
     return mp3_url
   end
 
