@@ -53,6 +53,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_23_034447) do
     t.string "font_style"
     t.string "font_family"
     t.integer "voice"
+    t.string "font_family"
+    t.string "font_style"
     t.index ["source_id"], name: "index_outputs_on_source_id"
     t.index ["user_id"], name: "index_outputs_on_user_id"
   end
