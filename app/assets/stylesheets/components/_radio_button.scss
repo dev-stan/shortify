@@ -5,9 +5,8 @@
 }
 
 .category-item {
-  flex: 0 0 0%;
+  transition-duration: 500ms;
   &:hover {
-    transition-duration: 500ms;
     transform: scale(1.1);
   }
 }
@@ -23,16 +22,22 @@
   font-size: 12px;
   text-align: left;
 }
-
-.category-selector:checked + label {
-  border: 4px solid #ba3bd0;
-  border-radius: 8px;
+.category-selector:checked + label{
+  transition-duration: 500ms;
+  transform: scale(1.1);
+  &:hover {
+    transform: scale(1.0);
+  }
 }
+
+// .category-selector:checked + label {
+//   height: 98.5%;
+//   border: 4px solid #6D4DFF;
+//   border-radius: 12px;
+// }
 
 .voice-wrapper {
   display: flex;
-  justify-content: left;
-  flex-wrap: wrap;
 }
 
 .voice-item {

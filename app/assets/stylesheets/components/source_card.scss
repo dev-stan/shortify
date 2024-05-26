@@ -1,18 +1,16 @@
-.examples_card {
-  margin-left: 20px;
-  margin-right: 20px;
+.source_card {
   position: relative;
-  transition: all 1500ms ease; /* Apply transition to the main button state */
-
-  .card {
-    overflow: hidden;
-    border-radius: 16px;
-  }
 
   video {
     width: 200px; /* Ensure the video fills the width of its container */
     height: 360px; /* Calculate height based on 9:16 aspect ratio */
+    border-radius: 6px;
     object-fit: cover;
+
+  }
+
+  .card {
+    overflow: hidden;
     border-radius: 16px;
   }
 }
