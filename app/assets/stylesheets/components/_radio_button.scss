@@ -22,13 +22,19 @@
   font-size: 12px;
   text-align: left;
 }
-
-.category-selector:checked + label {
+.category-selector:checked + label{
   transition-duration: 500ms;
-  height: 98.5%;
-  border: 4px solid #6D4DFF;
-  border-radius: 12px;
+  transform: scale(1.1);
+  &:hover {
+    transform: scale(1.0);
+  }
 }
+
+// .category-selector:checked + label {
+//   height: 98.5%;
+//   border: 4px solid #6D4DFF;
+//   border-radius: 12px;
+// }
 
 .voice-wrapper {
   display: flex;
