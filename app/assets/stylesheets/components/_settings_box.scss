@@ -1,7 +1,38 @@
 .settings-box {
-  border: 1px solid #6B6B6B;
+  border: 2px solid #6b6b6b6e;
   border-radius: 16px;
   padding: 16px;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+.text-input {
+  border: 0px solid #6B6B6B;
+  border-radius: 16px;
+  background: #050c2c;
+  resize: none;
+  color: white;
+
+  &:focus {
+    border: 0px solid #6B6B6B;
+    border-radius: 16px;
+    background: #050c2c;
+    resize: none;
+    color: white;
+  }
+}
+
+.choice-input {
+  border: 0px solid #6B6B6B;
+  border-radius: 16px;
+  background: #050c2c;
+}
+
+.label-text {
+  color: rgba(255, 255, 255, 0.71);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.inside-text {
 }
