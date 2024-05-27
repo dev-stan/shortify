@@ -21,19 +21,17 @@ class GenerateVideo
       'Accept' => 'application/json',
       'x-api-key' => ENV['SHOTSTACK_API']
       }
-
+    @mp3_url = 'https://shotstack-create-api-stage-assets.s3.amazonaws.com/8nfd8mqheb/01hyv-xww1e-ckcaw-sf7qy-xcmbs4.mp3'
+    @subtitles = ''
   end
-
   def final_video_link
-    p 'creating mp3'
-    @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
+    # p 'creating mp3'
+    # @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
     p 'creating subtitle'
     subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
     p 'creating video'
     generate_video(subtitles)  # Generate video with the obtained
   end
-
-
 
   private
 

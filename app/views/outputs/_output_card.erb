@@ -5,12 +5,7 @@
       <%= link_to '/', class: 'link yt' do %><i class="fa-brands fa-youtube"></i><% end %>
       <%= link_to '/', class: 'link insta' do %><i class="fa-brands fa-instagram"></i><% end %>
       <%= link_to '/', class: 'link tiktok' do %><i class="fa-brands fa-tiktok"></i><% end %>
-      <%= link_to download_video_path, class: 'li download' do %><i class="fa-solid fa-download"></i><% end %>
+      <%= link_to output.url, class: 'link download', download: output.url do %><i class="fa-solid fa-download"></i><% end %>
     </div>
   </div>
 </div>
-url = video.download_url
-new_file_path = "#{Rails.root.to_s}/public/users/familyvideos/thumbs/your_video.mp4"
-open(new_file_path, "wb") do |file|
-file.print open(url).read
-end
