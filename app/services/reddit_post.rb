@@ -6,6 +6,7 @@ require 'json'
 
 class RedditPost
 
+
   CLIENT_ID = ENV['REDDIT_CLIENT_ID']
   SECRET = ENV['REDDIT_SECRET']
   USER_AGENT = 'RubyScript/1.0'
@@ -24,7 +25,7 @@ class RedditPost
     url = top_post['url']
     upvotes = top_post['score']
 
-    return {content, title, url, upvotes}
+    return content
   end
 
   private

@@ -3,6 +3,7 @@ class SourcesController < ApplicationController
     @user = current_user
     @sources = Source.all
     @output = Output.new
+    @reddit_script = RedditPost.new.top_post
   end
 
   def show
