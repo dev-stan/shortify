@@ -27,6 +27,16 @@ end
     end
   end
 
+  def download
+    @output = Output.find(params[:id])
+    @video = @output.url
+    send_file(
+      @video,
+      filename: "video.mp4",
+      type: "video/mp4"
+    )
+  end
+
   def output_params
     # params.require(:output).permit(:script, :font_family, :font_style, :voice)
     params.require(:output).permit(:source_id, :font_family, :font_style, :font_size, :script, :voice)
