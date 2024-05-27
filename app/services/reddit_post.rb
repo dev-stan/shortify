@@ -6,14 +6,17 @@ require 'json'
 
 class RedditPost
 
+  def initialize(subreddit)
+    @subreddit = 'stories'
+  end
+
 
   CLIENT_ID = ENV['REDDIT_CLIENT_ID']
   SECRET = ENV['REDDIT_SECRET']
   USER_AGENT = 'RubyScript/1.0'
 
   AUTH_URL = 'https://www.reddit.com/api/v1/access_token'
-  SUBREDDIT = 'stories'
-  TOP_POST_URL = "https://oauth.reddit.com/r/#{SUBREDDIT}/top?limit=1&t=day"
+  TOP_POST_URL = "https://oauth.reddit.com/r/stories/top?limit=1&t=day"
 
 
   def top_post
@@ -57,5 +60,6 @@ class RedditPost
     end
 
     JSON.parse(res.body)['data']['children'].first['data']
+    # JSON.parse(res.body)['data']['children'].first['data']
   end
 end

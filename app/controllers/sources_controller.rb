@@ -3,7 +3,13 @@ class SourcesController < ApplicationController
     @user = current_user
     @sources = Source.all
     @output = Output.new
-    @reddit_script = RedditPost.new.top_post
+  end
+
+  def reddit
+    if params[:query].present?
+      @reddit_script = RedditPost.new(params[:query]).top_post
+      render json: {string: @reddit_script}
+    end
   end
 
   def show
