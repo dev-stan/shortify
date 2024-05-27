@@ -24,7 +24,6 @@ class GenerateVideo
     @mp3_url = 'https://shotstack-create-api-stage-assets.s3.amazonaws.com/tao11s6mke/01hyw-a53dg-k8tx6-v8bh2-8qjz84.mp3'
     @subtitles = [{"id"=>0, "seek"=>0, "start"=>0.0, "end"=>2.559999942779541, "text"=>" Hello, how are you? Bye.", "tokens"=>[50364, 2425, 11, 577, 366, 291, 30, 4621, 13, 50492], "temperature"=>0.0, "avg_logprob"=>-0.553535521030426, "compression_ratio"=>0.75, "no_speech_prob"=>0.00023138776305131614}]
   end
-
   def final_video_link
     # p 'creating mp3'
     # @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
@@ -35,7 +34,6 @@ class GenerateVideo
   end
 
   # start_time += time_per_word
-
   private
 
   def generate_video(subtitles)
