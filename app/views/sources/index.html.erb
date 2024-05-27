@@ -1,10 +1,10 @@
 <div class="container mt-5" data-controller="reddit-form">
   <h1 class="text-center">Create a new Video:</h1>
-  <%= form_with url: sources_reddit_path, method: :get, html: { data: { action: "submit->reddit-form#fetch_backend" } } do |f| %>
-    <%= f.label :query, "Type a movie title" %>
-    <%= f.text_field :query, class: "form-control", value: params[:query], data: { reddit_form_target: "fsubmit" } %>
-    <%= f.submit "Search", class: "btn btn-primary" %>
-  <% end %>
+  <div class="reddit-form settings-box">
+    <%= form_with url: sources_reddit_path, method: :get, html: { data: { action: "submit->reddit-form#fetch_backend" } } do |f| %>
+      <%= f.text_field :query, class: "form-control", value: params[:query], data: { reddit_form_target: "fsubmit" }, class: 'text-input inside-text w-100' %>
+    <% end %>
+  </div>
   <%= simple_form_for [@source, @output] do |f| %>
     <div class="container w-30 pb-4 mb-3 text-white">
       <fieldset class="form-group radio_buttons required snippet_category">
