@@ -21,14 +21,16 @@ class GenerateVideo
       'Accept' => 'application/json',
       'x-api-key' => ENV['SHOTSTACK_API']
       }
-    @mp3_url = 'https://shotstack-create-api-stage-assets.s3.amazonaws.com/tao11s6mke/01hyw-a53dg-k8tx6-v8bh2-8qjz84.mp3'
-    @subtitles = [{"id"=>0, "seek"=>0, "start"=>0.0, "end"=>2.559999942779541, "text"=>" Hello, how are you? Bye.", "tokens"=>[50364, 2425, 11, 577, 366, 291, 30, 4621, 13, 50492], "temperature"=>0.0, "avg_logprob"=>-0.553535521030426, "compression_ratio"=>0.75, "no_speech_prob"=>0.00023138776305131614}]
+    @mp3_url = ''
+    # sample mp3'https://shotstack-create-api-stage-assets.s3.amazonaws.com/tao11s6mke/01hyw-a53dg-k8tx6-v8bh2-8qjz84.mp3'
+    @subtitles = ''
+    # sample subs[{"id"=>0, "seek"=>0, "start"=>0.0, "end"=>2.559999942779541, "text"=>" Hello, how are you? Bye.", "tokens"=>[50364, 2425, 11, 577, 366, 291, 30, 4621, 13, 50492], "temperature"=>0.0, "avg_logprob"=>-0.553535521030426, "compression_ratio"=>0.75, "no_speech_prob"=>0.00023138776305131614}]
   end
   def final_video_link
-    # p 'creating mp3'
-    # @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
-    # p 'creating subtitle'
-    # @subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
+    p 'creating mp3'
+    @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
+    p 'creating subtitle'
+    @subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
     p 'creating video'
     generate_video(@subtitles)  # Generate video with the obtained
   end
@@ -42,7 +44,7 @@ class GenerateVideo
     css = "span { background: white; font-family: \"Lato\"; font-size: 60px;color: #000000;font-weight: bold;font-style: normal;text-decoration: none;line-height: 200;padding: 10;}"
 
     #"p { font-family: \"Lato\"; color: #ffffff; font-size: 60px; text-align: center; font-weight: bold;    }"
-    word_split = subtitles.first['text'].split
+    # word_split = subtitles.first['text'].split
     segment_clips = subtitles.map do |subtitle|
       start = subtitle['start'].to_f
       words = subtitle['text'].split
@@ -55,8 +57,15 @@ class GenerateVideo
           body = {
             "asset": {
               "type": "html",
-              "html": "<span>#{word}</span>",
-              "css": css
+              # "html": "<p>#{subtitle['text']}</p>",
+              "html": "<span class='text'>#{word.upcase}</span>",
+              "css": ".text { padding: 50px; background-color: #2175d9; line-height: 200px;font-size: 60px; color: #FFFFFF; font-weight: 600;font-family: 'Bangers'; }",
+              #  "<table>\n  <tr>\n    <td bgcolor=\"#2175d9\">\n          <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAIAAAC0tAIdAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABxJREFUeNpiVCy9yUA0YGIgBYyqHlVNfdUAAQYABPQBjSXFZ0oAAAAASUVORK5CYII=\"/>\n          </td>\n    <td bgcolor=\"#2175d9\">&nbsp;</td>\n    <td>\n      <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHxJREFUeNpiVCy9+Z8BAj4A8QUg3gjEG+53qz9gIAAYkTSjgwNAXAg05AIuzUx4DHYA4vNAw/uBWIBUzTBQAMT7sRlAjGYQMMBmALGasRpAimaYAfXkagaHAdB2A3I1g0A/oXgmBBTJtRkEAijR7E+JZgNKNAtQopkBIMAAqWEg7VTXSuIAAAAASUVORK5CYII=\"/>\n    </td>\n  </tr>\n  <tr>\n    <td bgcolor=\"#2175d9\">&nbsp;</td>\n    <td class=\"content\" bgcolor=\"#2175d9\">#{word}</td>\n    <td bgcolor=\"#2175d9\">&nbsp;</td>\n  </tr>\n  <tr>\n    <td>\n      <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHZJREFUeNpiVCy9+Z+BTMDEQAEAaf5AieYLlGjeSInmDWRrvt+t/gBIH6AktAvJ1gy0HRRoEyiJ50ZSQ54RmQNMbQJAaj8QG5CsmVQDMJIn0P+gFOdITBgw4pMEugJkez8QO5CsGckQBSAVAMT+UO+AvMYAEGAAviIal7TNKnoAAAAASUVORK5CYII=\"/>\n    </td>\n    <td bgcolor=\"#2175d9\">&nbsp;</td>\n    <td>\n      <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAACXBIWXMAAAsSAAALEgHS3X78AAAAbklEQVQokWNULL35n4FMwESuRgYKNX+kRPMFSjRvGBDNB+91qT0gV3MBA5mhPfFel9oFcjRfZGBgaIBxSNEM0uhwr0vtA6maMTQSq3kiNo0gwIJH00FQqMICBxtA1vwRlORAkQ/CoHjE6x4GBgYA2i8hG289oyAAAAAASUVORK5CYII=\"/>\n    </td>\n  </tr>\n</table>",
+              # "css": ".content { font-size: 60px; color: #FFFFFF; font-weight: 600; } td { font-size: 1px; vertical-align: middle; }",
+              # "width": 400,
+              # "height": 400
+              # "html": "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n  <tr>\n    <td>\n      <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHFJREFUeNpiYCAC/P//XwGIC4B4PxC//w8FhDQZQDVgBbg0CQBx/38CAJfG8/+JAGRrRNFMqkZ0zf3/SQSMsFAFUucZSARMULqfgQzACEoAQPo+OZpBNgcwkAlAmv3J1Qxy9nsgLUCu5v+UOJtsABBgAD84LB2rMDaKAAAAAElFTkSuQmCC\"/>\n    </td>\n    <td bgcolor=\"#FFFFFF\">&nbsp;</td>\n    <td>\n      <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAGJJREFUeNpi+I8A74F4PxAXALECAzHgP24AMsiAXM0w0A/EAuRqBoHzWA34TzzANOA/aQDVgP+kg35KNP+HxQITA3kAbDsjyBgyDVAk12YQCKDE5gOUaP5AiWYGSvzMABBgAI9IZJYHXKOcAAAAAElFTkSuQmCC\"/>\n    </td>\n  </tr>\n  <tr>\n    <td bgcolor=\"#FFFFFF\">&nbsp;</td>\n    <td class=\"content\" bgcolor=\"#FFFFFF\">{{whiteText}}</td>\n    <td bgcolor=\"#FFFFFF\">&nbsp;</td>\n  </tr>\n  <tr>\n    <td>\n      <img src=\"data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAG5JREFUeNpi/A8EDGQCJgYKAEjzB0o0X6BE80ZyNTMCw0sBSN8ny2ZGRsYHQPoAWTaDCKDtBkDqPFlRBbQdFGgTyI4zoO0CQHz+PwmAIgMocgE+L/STpRnJEAMg3k+WZiRDFIC4AGrQe5hmgAADAFo7+QIDpQviAAAAAElFTkSuQmCC\"/>\n    </td>\n    <td bgcolor=\"#FFFFFF\">&nbsp;</td>\n    <td bgcolor=\"#FFFFFF\">&nbsp;</td>\n  </tr>\n</table>",
+              #               "css": ".content { padding: 5px 0 -5px 0; font-size: 60px; color: #2175d9; font-weight: 600; text-align: right; } td { font-size: 1px; vertical-align: middle; }",
             },
             "start": start,
             "length": length_word
@@ -88,7 +97,13 @@ class GenerateVideo
           "src": @mp3_url,
           "effect": "fadeOut"
       },
+
       "background": "#000000",
+      "fonts": [
+        {
+            "src": "https://drive.google.com/uc?export=download&id=1LuLfTcGJt-A1sCQ55iCEI4042XlrOHWM"
+        }
+      ],
       "tracks": [
           {
               "clips": segment_clips.flatten
