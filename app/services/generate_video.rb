@@ -26,9 +26,9 @@ class GenerateVideo
 
   def final_video_link
     p 'creating mp3'
-    @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
-    p 'creating subtitle'
-    subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
+    # @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
+    # p 'creating subtitle'
+    # subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
     p 'creating video'
     generate_video(subtitles)  # Generate video with the obtained
   end
@@ -47,8 +47,9 @@ class GenerateVideo
       {
         "asset": {
             "type": "html",
-            "html": "<p>#{subtitle['text']}</p>",
-            "css": css
+            # "html": "<p>#{subtitle['text']}</p>",
+            "html": "<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">\n  <tr>\n <td class=\"content\" bgcolor=\"#FFFFFF\">#{subtitle['text']}</td>\n </tr>\n</table>",
+            "css": ".content { padding: 5px 0 -5px 0; font-size: 60px; color: #2175d9; font-weight: 600; text-align: right; } td { font-size: 1px; vertical-align: middle; }"
         },
         "start": subtitle['start'].to_f,
         "length": length
