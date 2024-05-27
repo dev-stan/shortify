@@ -8,7 +8,7 @@ class SourcesController < ApplicationController
   def reddit
     if params[:query].present?
       @reddit_script = RedditPost.new(params[:query]).top_post
-      render json: {string: @reddit_script}
+      render json: @reddit_script
     end
   end
 

@@ -4,7 +4,6 @@ require 'json'
 require 'dotenv/load'
 
 class RedditPost
-
   def initialize(subreddit)
     @subreddit = subreddit.to_s
   end
@@ -17,19 +16,30 @@ class RedditPost
 
   def top_post
     token = get_token
-    top_posts = fetch_top_posts(token, limit: 10)
+    limit = 10
+    after = nil
+    suitable_posts = []
 
-    random_post = top_posts.sample
-    content = random_post['selftext']
-    title = random_post['title']
-    url = random_post['url']
-    upvotes = random_post['score']
+    n = 0
+    while suitable_posts.size < 10
+      n += 1
+      break if n > 15
 
-    if content.nil? || content.empty?
-      return title
+      top_posts, after = fetch_top_posts(token, limit: limit, after: after)
+
+      top_posts.each do |post|
+        content = post['selftext']
+        title = post['title']
+        next if content.nil? || content.empty?
+
+        if content.split.size <= 500
+          suitable_posts << { content: content, title: title }
+          break if suitable_posts.size == 10
+        end
+      end
     end
 
-    return content
+    return suitable_posts.sample || { content: 'no', title: 'no' }
   end
 
   private
@@ -48,8 +58,9 @@ class RedditPost
     JSON.parse(res.body)['access_token']
   end
 
-  def fetch_top_posts(token, limit: 1)
-    top_posts_url = "https://oauth.reddit.com/r/#{@subreddit}/top?limit=#{limit}&t=month"
+  def fetch_top_posts(token, limit: 1, after: nil)
+    top_posts_url = "https://oauth.reddit.com/r/#{@subreddit}/top?limit=#{limit}&t=week"
+    top_posts_url += "&after=#{after}" if after
     uri = URI(top_posts_url)
     req = Net::HTTP::Get.new(uri)
     req['Authorization'] = "Bearer #{token}"
@@ -59,6 +70,7 @@ class RedditPost
       http.request(req)
     end
 
-    JSON.parse(res.body)['data']['children'].map { |post| post['data'] }
+    data = JSON.parse(res.body)['data']
+    [data['children'].map { |post| post['data'] }, data['after']]
   end
 end
