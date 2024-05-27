@@ -32,7 +32,7 @@ class RedditPost
         title = post['title']
         next if content.nil? || content.empty?
 
-        if content.split.size <= 500
+        if content.split.size <= 350
           suitable_posts << { content: content, title: title }
           break if suitable_posts.size == 10
         end
