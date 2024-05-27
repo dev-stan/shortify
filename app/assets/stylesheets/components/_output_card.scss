@@ -48,4 +48,11 @@
         text-shadow: 1px 1px 10px rgba(44, 139, 126, 0.6);
       }
     }
+    .download {
+      &:hover {
+        color: rgb(181, 181, 181);
+        transition-duration: 500ms;
+        text-shadow: 1px 1px 10px rgba(101, 121, 118, 0.6);
+      }
+    }
   }

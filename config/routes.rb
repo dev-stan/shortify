@@ -12,5 +12,6 @@ Rails.application.routes.draw do
 resources :sources, only: [:index]
 
 resources :outputs, only: [:index, :show, :new, :create]
+get '/download_video', to: 'outputs#download', as: 'download_video'
 
 end
