@@ -26,7 +26,15 @@
         <div class="container text-white">
           <div class="d-flex flex-column mt-2">
             <div class="settings-box mb-3">
-              <%= f.input :script, input_html: { rows: 10 }, :input_html => { :class => 'text-input inside-text' }, :label => 'What should be the content of your video? Write your story below', :label_html => { class: 'label-text'}, wrapper_html: { class: 'inside-text' }%>
+              <%= f.input :script,
+                input_html: { rows: 10,
+                              class: 'text-input inside-text',
+                              value: @reddit_script
+                            },
+                label: 'What should be the content of your video? Write your story below',
+                label_html: { class: 'label-text' },
+                wrapper_html: { class: 'inside-text' }
+              %>
             </div>
             <div class="d-flex flex-column gap-3 settings-box">
               <div class="label-text">
@@ -54,6 +62,5 @@
         <% end %>
       </div>
     </div>
-    <%=@reddit_script%>
   </body>
 </html>
