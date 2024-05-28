@@ -1,0 +1,9 @@
+<div class="carousel-item active" data-bs-interval="false">
+  <div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title"><%= post[:title] %></h5>
+      <p class="card-text"><%= post[:content] %></p>
+      <%= link_to 'helo', sources_video_path(title: post[:title], script: post[:content]), class: 'link-to' %>
+    </div>
+  </div>
+</div>

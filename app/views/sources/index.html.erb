@@ -1,66 +1,39 @@
-<div class="container mt-5" data-controller="reddit-form">
-  <h1 class="text-center">Create a new Video:</h1>
-  <div class="">
-    <%= form_with url: sources_reddit_path, method: :get, html: { data: { action: "change->reddit-form#fetch_backend" }, id: 'reddit' } do |f| %>
-    <% end %>
-  </div>
-  <%= simple_form_for [@source, @output] do |f| %>
-    <div class="container w-30 pb-4 mb-3 text-white">
-      <fieldset class="form-group radio_buttons required snippet_category">
-        <div class="category-wrapper">
-          <input type="hidden" name="output[source_id]" value="">
-          <% @sources.each_with_index do |source, index| %>
-            <div class="category-item ms-4">
-              <input class="form-check-input radio_buttons required category-selector" type="radio" value="<%= source.id %>" name="output[source_id]" id="card-<%= index %>" data-action="change->reddit-form#fetch_backend">
-              <label class="form-check-label collection_radio_buttons" for="card-<%= index %>"><%= render 'pages/source_card', source: source.video.key %></label>
-            </div>
-          <% end %>
-        </div>
-      </fieldset>
+<div class="container mt-5 text-white" data-controller="reddit-form">
+  <div class="row">
+    <h1 class="text-center">Create a new Video</h1>
+    <div class="">
+      <%= form_with url: sources_reddit_path, method: :get, html: { data: { action: "change->reddit-form#fetch_backend" }, id: 'reddit' } do |f| %>
+      <% end %>
     </div>
-    <div class="container text-white">
-      <div class="d-flex flex-column mt-2">
-        <div class="settings-box mb-3">
-          <div class="form-check">
-            <%= radio_button_tag(:query, 'stories', params[:query] == 'askreddit', class: "form-check-input", id: "stories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
-            <%= label_tag(:stories, 'r/Stories', class: "form-check-label") %>
-          </div>
-          <div class="form-check">
-            <%= radio_button_tag(:query, 'ShortSeriousStories	', params[:query] == 'ShortSeriousStories	', class: "form-check-input", id: "ShortSeriousStories	", data: { action: "change->reddit-form#fetch_backend",reddit_form_target: "fsubmit" }) %>
-            <%= label_tag(:ShortSeriousStories	, 'r/ShortSeriousStories	', class: "form-check-label") %>
-          </div>
-          <div class="form-check">
-            <%= radio_button_tag(:query, 'ShortScaryStories', params[:query] == 'ShortScaryStories', class: "form-check-input", id: "ShortScaryStories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
-            <%= label_tag(:ShortScaryStories, 'r/ShortScaryStories', class: "form-check-label") %>
-          </div>
+    <div class="col-6">
+      <%= simple_form_for [@source, @output] do |f| %>
+        <div class="form-check">
+          <%= radio_button_tag(:query, 'stories', params[:query] == 'askreddit', class: "form-check-input", id: "stories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
+          <%= label_tag(:stories, 'r/Stories', class: "form-check-label") %>
         </div>
-        <div class="settings-box mb-3">
-          <%= f.input :title, input_html: { rows: 1, class: 'text-input inside-text', value: params[:query], data: { reddit_form_target: "title" } }, label: 'Suggested title of your video', label_html: { class: 'label-text' }, wrapper_html: { class: 'inside-text' } %>
-          <%= f.input :script, input_html: { rows: 10, class: 'text-input inside-text', value: params[:query], data: { reddit_form_target: "content" } }, label: 'What should be the content of your video? Write your story below', label_html: { class: 'label-text' }, wrapper_html: { class: 'inside-text' } %>
+        <div class="form-check">
+          <%= radio_button_tag(:query, 'ShortSeriousStories	', params[:query] == 'ShortSeriousStories	', class: "form-check-input", id: "ShortSeriousStories	", data: { action: "change->reddit-form#fetch_backend",reddit_form_target: "fsubmit" }) %>
+          <%= label_tag(:ShortSeriousStories	, 'r/ShortSeriousStories	', class: "form-check-label") %>
         </div>
-        <div class="d-flex flex-column gap-3 settings-box">
-          <div class="label-text">
-            Font Size: <output id="rangevalue">12</output>
-            <%= f.input :font_size, label: false, as: :range, input_html: { value: 12, min: 1, max: 50, oninput: "rangevalue.value=value", class: "slider-input" } %>
-          </div>
-          <%= f.input :font_family, collection: Output::FONTFAMILIES, include_blank: false, wrapper: false, input_html: { class: 'mb-3 choice-input' }, label_html: { class: 'label-text' } %>
-          <%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false, wrapper: false, input_html: { class: 'mb-3 choice-input' }, label_html: { class: 'label-text' } %>
-          <fieldset class="form-group radio_buttons required snippet_category">
-            <div class="voice-wrapper">
-              <input type="hidden" name="output[voice]" value="">
-              <% Output::VOICES.each do |voice| %>
-                <div class="voice-item">
-                  <input class="form-check-input radio_buttons required voice-selector" type="radio" value="<%= voice %>" name="output[voice]" id="<%= voice %>" data-action="change->reddit-form#fetch_backend">
-                  <label class="form-check-label collection_radio_buttons" for="<%= voice %>">Voice <%= voice %></label>
-                </div>
-              <% end %>
-            </div>
-          </fieldset>
+        <div class="form-check">
+          <%= radio_button_tag(:query, 'ShortScaryStories', params[:query] == 'ShortScaryStories', class: "form-check-input", id: "ShortScaryStories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
+          <%= label_tag(:ShortScaryStories, 'r/ShortScaryStories', class: "form-check-label") %>
         </div>
+      <% end %>
+    </div>
+    <div class="col-6">
+      <div id="carouselExampleAutoplaying" class="carousel slide">
+        <div class="carousel-inner" data-reddit-form-target="carousel">
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
       </div>
-      <div class="d-flex justify-content-center mb-3">
-        <%= f.button :submit, "Create Video", class: "btn btn-secondary rounded-pill p-2 px-4" %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>
