@@ -1,15 +1,56 @@
 <div class="container">
-  <div class="top-content text-center pt-5">
+  <div class="top-content text-center pt-3">
     <h1>Viral shorts with just <span class="accent" data-controller="typed"></span></h1>
     <h2>Generate Engaging Shorts Using Customizable Templates</h2>
   </div>
-  <div class="go-to-new pt-5 text-center">
-    <%= render 'pages/button', text: 'Start Creating', path: sources_path %>
+  <div class="go-to-new pt-4 text-center">
+    <%= render 'pages/button', text: 'Start Creating', path: sources_path, class: 'btn-1' %>
   </div>
-  <div class="examples d-flex justify-content-center" style="padding-top: 100px;">
+  <div class="examples d-flex justify-content-center" style="padding-top: 50px;">
     <%= render 'pages/examples_card', video_source: 'https://res.cloudinary.com/dcug1pvpk/video/upload/v1716529190/lazyreel-seeds/story-video-1.mp4' %>
     <%= render 'pages/examples_card', video_source: 'https://res.cloudinary.com/dcug1pvpk/video/upload/v1716529192/lazyreel-seeds/story-video-2.mp4' %>
     <%= render 'pages/examples_card', video_source: 'https://res.cloudinary.com/dcug1pvpk/video/upload/v1716529190/lazyreel-seeds/story-video-3.mp4' %>
     <%= render 'pages/examples_card', video_source: 'https://res.cloudinary.com/dcug1pvpk/video/upload/v1716529189/lazyreel-seeds/story-video-4.mp4' %>
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="container">
+    <div class="title"></div>
+    <div class="row-2 step-by-step" style="margin-top: 100px;">
+      <div class="col-8 sm title">
+        <h1>ANYONE CAN MAKE A GREAT VIDEO</h1>
+      </div>
+      <div class="col-2 btntimeline">
+        <a href="#contact" class="round w-inline-block keychainify-checked"><div data-w-id="7f977c3d-3265-a89d-d163-3436595ccc11" class="round-button tc-gold"><div class="text-block-2">→ Get ←<br>Started</div></div></a></div>
+      <div class="row-2 guide d-flex">
+        <div class="timeline-stroke"></div>
+        <div class="col-2 lg-9 tc-beige">
+          <div class="day">Step 1</div>
+          <h3 class="heading">Choose Your Story!</h3>
+          <div class="diamond"></div>
+          <div class="description">Share one of your favorite stories or posts in a short-form video. If you don't have one in mind, you can import popular stories directly from Reddit!</div>
+        </div>
+        <div class="col-2 lg-9 tc-beige">
+          <div class="day">Step 2</div>
+          <h3 class="heading">Get Awesome Visuals!</h3>
+          <div class="diamond"></div>
+          <div class="description">Select from our curated catalog of background videos to get the right feel for your content.</div>
+        </div>
+        <div class="col-2 lg-6 tc-beige">
+          <div class="day">Step 3</div>
+          <h3 class="heading">Juuuuust Right!</h3>
+          <div class="diamond"></div>
+          <div class="description">Choose from a selection of font styles, sizes, and families for your subtitles. Pick a voice-over that suits your video! Adjust everything to your liking and create your video on the spot.</div>
+        </div>
+        <div class="col-2 lg-9 tc-beige" style="margin-bottom: 100px;">
+          <div class="day">Final Step</div>
+          <h3 class="heading">Get It, Share It, Love It!</h3>
+          <div class="diamond"></div>
+          <div class="diamond2"></div>
+          <div class="description">After creating your short-form video, access it anytime in your personal library, along with any past videos you’ve made with us. Download them or share directly to your favorite social media sites and sharing platforms!</div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
