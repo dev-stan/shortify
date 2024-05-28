@@ -1,0 +1,25 @@
+<div class="container ">
+  <h1 class="my-3">Your Video</h1>
+  <div class="d-flex justify-content-center">
+    <div class="row">
+      <div class="col-6">
+        <%= render 'output_show_card', source: @output.url, output: @output %>
+      </div>
+      <div class="col-6 border border-light rounded p-3">
+        <h2 class="text-decoration-underline">Video Details</h2>
+        <p><c class="text-decoration-underline fw-bold">Created on:  </c><%= @output.created_at %></p>
+        <p><c class="text-decoration-underline fw-bold">Script:  </c> <%= @output.script %></p>
+        <p><c class="text-decoration-underline fw-bold">Font Size:  </c> <%= @output.font_size %></p>
+        <p><c class="text-decoration-underline fw-bold">Font Family:  </c> <%= @output.font_family %></p>
+        <p><c class="text-decoration-underline fw-bold">Font Style:  </c><%= @output.font_style %></p>
+        <p><c class="text-decoration-underline fw-bold">Voice Selected:  </c><%= @output.voice %></p>
+        <div class="button_container d-flex justify-content-around border-0">
+          <%= link_to '/', class: 'show-link yt' do %><i class="fa-brands fa-youtube"></i><% end %>
+          <%= link_to '/', class: 'show-link insta' do %><i class="fa-brands fa-instagram"></i><% end %>
+          <%= link_to '/', class: 'show-link tiktok' do %><i class="fa-brands fa-tiktok"></i><% end %>
+          <%= link_to @output.url, class: 'show-link download', download: @output.url do %><i class="fa-solid fa-download"></i><% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

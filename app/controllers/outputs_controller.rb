@@ -15,7 +15,7 @@ end
     @output.url = GenerateVideo.new(@output.source.url, @output.script).final_video_link
     @output.user = current_user
         if @output.save
-      redirect_to sources_path
+      redirect_to output_path(@output)
       puts 'saved'
       flash.notice = "Output created."
     else
@@ -25,6 +25,10 @@ end
       p @output.errors.messages
       flash.alert = "Output failed."
     end
+  end
+
+  def show
+    @output = Output.find(params[:id])
   end
 
   def download

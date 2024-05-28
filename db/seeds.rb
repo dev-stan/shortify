@@ -1,6 +1,5 @@
 # db/seeds.rb
 
-Source.delete_all
 Output.destroy_all
 Source.destroy_all
 puts 'Deleted all sources'
