@@ -7,10 +7,18 @@ class SourcesController < ApplicationController
 
   def reddit
     if params[:query].present?
-      @reddit_script = RedditPost.new(params[:query]).top_post
-      render json: @reddit_script
+      reddit_post = RedditPost.new(params[:query]).top_post
+      @reddit_card = render_to_string partial: "sources/reddit_card", locals: {post: reddit_post}, formats: [:html]
+      render json: {html: @reddit_card}
     end
   end
+
+  def video
+    @user = current_user
+    @sources = Source.all
+    @output = Output.new
+  end
+
 
   def show
     @user = current_user

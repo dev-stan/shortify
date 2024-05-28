@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["title", "content", "fsubmit"];
+  static targets = ["title", "content", "fsubmit", "carousel"]
 
   connect() {
     console.log("Controller connected");
@@ -17,8 +17,15 @@ export default class extends Controller {
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-          this.titleTarget.value = data.title
-          this.contentTarget.value = data.content
+        console.log(this.carouselTarget);
+
+        // Remove the 'active' class from each carousel item
+        const items = this.carouselTarget.querySelectorAll('.carousel-item');
+        items.forEach(item => item.classList.remove('active'));
+
+        // Insert the new HTML content
+        this.carouselTarget.insertAdjacentHTML('afterbegin', data.html);
       });
   }
+
 }
