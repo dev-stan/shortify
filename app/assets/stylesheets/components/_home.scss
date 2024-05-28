@@ -1,13 +1,13 @@
 .home {
   background: #020617;
   h1 {
-    color: white;
+    color: #F9F6E0;
     font-weight: 700;
     font-size: 60px;
   }
 
   p {
-    color: white;
+    color: #F9F6E0;
   }
 
   h2 {
@@ -16,6 +16,103 @@
   }
 
   .accent {
-    color: #6D4DFF
+    color: #F4C644
   }
+}
+
+@media screen and (min-width: 1440px) {
+  .wrapper {
+      max-width: 1920px;
+      padding-left: 12px;
+      padding-right: 12px;
+  }
+}
+.container-2 {
+  max-width: 1240px;
+}
+
+.row-2 {
+  justify-content: space-between;
+  flex-flow: wrap;
+  align-content: stretch;
+  margin-left: -15px;
+  margin-right: -15px;
+  display: flex;
+}
+
+.timeline-stroke {
+  border: 1px dashed rgba(249, 246, 224, .3);
+  width: 100%;
+  height: 2px;
+  margin: 10px 15px;
+  padding-bottom: 0;
+  padding-right: 0;
+  font-size: 0;
+  line-height: 0;
+  position: relative;
+  top: 139px;
+}
+.col-2.lg-9.tc-beige {
+  flex: 0 auto;
+  width: 20%;
+}
+.day {
+  font-size: 16px;
+  line-height: 24px;
+}
+.heading {
+  margin-top: 8px;
+  font-size: 20px;
+  line-height: 30px;
+}
+.diamond {
+  background-image: asset-url('shortifylogo.png');
+  background-position: 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 24px;
+  height: 32px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding-bottom: 0;
+  padding-right: 0;
+  font-size: 0;
+  line-height: 0;
+}
+.description {
+  font-size: 16px;
+  line-height: 24px;
+}
+.title.h{
+  font-family: 'MADE Okine Sans PERSONAL USE Outline';
+  font-weight: bold;
+  font-style: normal;
+}
+
+.round {
+  text-decoration: none;
+  max-width: 100%;
+  display: inline-block;
+  text-transform: uppercase;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 22px;
+  transition: background-color .2s;
+  text-align: center;
+  border: 1px solid #f4c644;
+  border-radius: 100px;
+  justify-content: center;
+  align-items: center;
+  width: 144px;
+  height: 144px;
+  display: flex;
+  color:#F4C644;
+
+}
+
+.round:hover {
+  background: #F4C644;
+  color: #000000;
+  text-decoration: none;
+
 }
