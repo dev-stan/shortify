@@ -1,4 +1,4 @@
-<div class="container mt-5" data-controller="reddit-form">
+<div class="container mt-5" data-controller="reddit-form overlay">
   <h1 class="text-center">Create a new Video:</h1>
   <div class="">
     <%= form_with url: sources_reddit_path, method: :get, html: { data: { action: "change->reddit-form#fetch_backend" }, id: 'reddit' } do |f| %>
@@ -41,10 +41,10 @@
         <div class="d-flex flex-column gap-3 settings-box">
           <div class="label-text">
             Font Size: <output id="rangevalue">12</output>
-            <%= f.input :font_size, label: false, as: :range, input_html: { value: 12, min: 1, max: 50, oninput: "rangevalue.value=value", class: "slider-input" } %>
+            <%= f.input :font_size, label: false, as: :range, input_html: { value: 12, min: 1, max: 50, oninput: "rangevalue.value=value", class: "slider-input", data: {action: "change->overlay#resizefont"} } %>
           </div>
-          <%= f.input :font_family, collection: Output::FONTFAMILIES, include_blank: false, wrapper: false, input_html: { class: 'mb-3 choice-input' }, label_html: { class: 'label-text' } %>
-          <%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false, wrapper: false, input_html: { class: 'mb-3 choice-input' }, label_html: { class: 'label-text' } %>
+          <%= f.input :font_family, collection: Output::FONTFAMILIES, include_blank: false, wrapper: false, input_html: { class: 'mb-3 choice-input', data: {action: "change->overlay#fontfamily"} }, label_html: { class: 'label-text' } %>
+          <%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false, wrapper: false, input_html: { class: 'mb-3 choice-input', data: {action: "change->overlay#fontstyle"} }, label_html: { class: 'label-text' } %>
           <fieldset class="form-group radio_buttons required snippet_category">
             <div class="voice-wrapper">
               <input type="hidden" name="output[voice]" value="">
@@ -63,4 +63,5 @@
       </div>
     <% end %>
   </div>
+  <%= render 'pages/preview_card', video_source: 'https://res.cloudinary.com/dcug1pvpk/video/upload/v1716529190/lazyreel-seeds/story-video-1.mp4' %>
 </div>
