@@ -5,4 +5,10 @@ class PagesController < ApplicationController
     @user = current_user
     @source = Source.new
   end
+
+  def tos
+  end
+
+  def privacy
+  end
 end
