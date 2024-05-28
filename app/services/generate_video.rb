@@ -21,18 +21,20 @@ class GenerateVideo
       'Accept' => 'application/json',
       'x-api-key' => ENV['SHOTSTACK_API']
       }
-    @mp3_url = 'https://shotstack-create-api-stage-assets.s3.amazonaws.com/tao11s6mke/01hyw-a53dg-k8tx6-v8bh2-8qjz84.mp3'
+    @mp3_url = ''
     # sample mp3'https://shotstack-create-api-stage-assets.s3.amazonaws.com/tao11s6mke/01hyw-a53dg-k8tx6-v8bh2-8qjz84.mp3'
-    @subtitles = [{"id"=>0, "seek"=>0, "start"=>0.0, "end"=>2.559999942779541, "text"=>" Hello, how are you? Bye.", "tokens"=>[50364, 2425, 11, 577, 366, 291, 30, 4621, 13, 50492], "temperature"=>0.0, "avg_logprob"=>-0.553535521030426, "compression_ratio"=>0.75, "no_speech_prob"=>0.00023138776305131614}]
-    # sample subs[{"id"=>0, "seek"=>0, "start"=>0.0, "end"=>2.559999942779541, "text"=>" Hello, how are you? Bye.", "tokens"=>[50364, 2425, 11, 577, 366, 291, 30, 4621, 13, 50492], "temperature"=>0.0, "avg_logprob"=>-0.553535521030426, "compression_ratio"=>0.75, "no_speech_prob"=>0.00023138776305131614}]
+    @subtitles =''
+      # sample subs[{"id"=>0, "seek"=>0, "start"=>0.0, "end"=>2.559999942779541, "text"=>" Hello, how are you? Bye.", "tokens"=>[50364, 2425, 11, 577, 366, 291, 30, 4621, 13, 50492], "temperature"=>0.0, "avg_logprob"=>-0.553535521030426, "compression_ratio"=>0.75, "no_speech_prob"=>0.00023138776305131614}]
   end
   def final_video_link
-    p 'creating mp3'
-    # @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
-    # p 'creating subtitle'
-    # @subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
-    p 'creating video'
-    generate_video(@subtitles)  # Generate video with the obtained
+
+      p 'creating mp3'
+      @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
+      p 'creating subtitle'
+      @subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
+      p 'creating video'
+      generate_video(@subtitles)  # Generate video with the obtained
+
   end
 
   # start_time += time_per_word
@@ -43,36 +45,47 @@ class GenerateVideo
     last_word_endtime = subtitles.last['end'].to_f
     css = "span { background: white; font-family: \"Lato\"; font-size: 60px;color: #000000;font-weight: bold;font-style: normal;text-decoration: none;line-height: 200;padding: 10;}"
 
-    #"p { font-family: \"Lato\"; color: #ffffff; font-size: 60px; text-align: center; font-weight: bold;    }"
-    # word_split = subtitles.first['text'].split
     segment_clips = subtitles.map do |subtitle|
       start = subtitle['start'].to_f
       words = subtitle['text'].split
       total_letter_count = subtitle['text'].length
       total_time = subtitle['end'].to_f - subtitle['start'].to_f
+      # Check if the first and second words have 3 or fewer letters
+      api_body = []
+      modified_words = []
+      words.each_with_index do |word, i|
+        if word.length < 4 && word.length >= 1
+          combined_word = "#{word} #{words[i+1]}"
+          words[i+1] = ''
+          modified_words << combined_word
+        elsif word == ''
+          next
+        else
+          modified_words << word
+        end
+      end
 
-        word_clips = words.map do |word|
-          # length = subtitle['end'].to_f - subtitle['start'].to_f
-          length_word = ((word.length.to_f + 1)/ total_letter_count) * total_time
-          body = {
+      modified_words.map do |word|
+        length_word = ((word.length.to_f + 1)/ total_letter_count) * total_time
+        body = {
             "asset": {
               "type": "html",
               # "html": "<p>#{subtitle['text']}</p>",
-              # "html": "<span class='text'>#{word.upcase}</span>",
-              "html": "<table border='\''0'\''><tr><td><h1>#{word.upcase}</h1></td></tr></table>",
+              "html": "<span class='text'>#{word.upcase}</span>",
+              # "html": "<table border='\''0'\''><tr><td><h1>#{word.upcase}</h1></td></tr></table>",
               # "css": ".text { padding: 50px; background-color: #2175d9; line-height: 60px;font-size: 60px; color: #FFFFFF; font-family: \"Rubik Mono One\"; }"
               # "html": "<span>#{word.upcase}</span>",
               # "css": "span { font-family: 'Indie Flower'; color: #80ffffff; font-size: 60px ;}",
               #"css": "span { font-family: 'Montserrat ExtraBold'; color: #80000000; font-size: 60px ;background-color: #80000000;}",
               # "height": 60,
               # "background": "#80ffffff"
-              # "css": "span { font-family: 'Montserrat ExtraBold'; color: #ffffff; font-size: 60px; text-align: center; }",
-              "css": "table { background-color: #000000; } td { padding-top: 10px; padding-bottom: 10px; } h1 { color: #FFFFFF; font-size: 34px; font-family: '\''Open Sans'\''; font-weight: bold; margin: 60px; text-align: center; }",
-              "width": 300,
+              "css": "span { font-family: 'Montserrat ExtraBold'; color: #ffffff; font-size: 60px; text-align: center; }",
+              # "css": "table { background-color: #000000; } td { padding-top: 10px; padding-bottom: 10px; } h1 { color: #FFFFFF; font-size: 34px; font-family: '\''Open Sans'\''; font-weight: bold; margin: 60px; text-align: center; }",
+              # "width": 300,
               # "html": "<table cellpadding='\''16'\''><tr><td><p>#{word.upcase}</p></td></tr></table>",
               # "css": "table { background-color: #33000000; } p { color: #FFFFFF; font-size: 100px; font-family: '\''Open Sans'\'' }",
               # "position": "center",
-              "height": 100
+              # "height": 100
             },
             "start": start,
             "length": length_word,
@@ -81,43 +94,47 @@ class GenerateVideo
           #                   "in": "fade",
           #                   "out": "fade"
           # }
-
-          }
-          start += length_word
-          body
-
+        }
+        start += length_word
+        api_body << body
       end
+      api_body
     end
-    # segment2_clips = subtitles.map do |subtitle|
-    #   start = subtitle['start'].to_f
-    #   words = subtitle['text'].split
-    #   total_letter_count = subtitle['text'].length
-    #   total_time = subtitle['end'].to_f - subtitle['start'].to_f
-
-    #     word_clips = words.map do |word|
-    #       # length = subtitle['end'].to_f - subtitle['start'].to_f
-    #       length_word = ((word.length.to_f + 1)/ total_letter_count) * total_time
-    #       blur_body = {
-    #               "asset": {
-    #                 "type": "html",
-    #                 # "html": "<p>#{subtitle['text']}</p>",
-    #                 # "html": "<span class='text'>#{word.upcase}</span>",
-    #                 # "css": ".text { padding: 50px; background-color: #2175d9; line-height: 200px;font-size: 60px; color: #FFFFFF; font-family: \"Rubik Mono One\"; }"
-    #                 "css": "span { font-family: 'Montserrat ExtraBold'; color: #000000; font-size: 60px; text-align: center; }",
-    #               },
-    #               "start": start,
-    #               "length": length_word,
-    #               "offset": {
-    #                 "x": 0.005,
-    #                 "y": -0.005
-    #             }
-    #             }
-    #       start += length_word
-    #       blur_body
-    #     end
-    #  end
+    segment2_clips = subtitles.map do |subtitle|
+      start = subtitle['start'].to_f
+      words = subtitle['text'].split
+      total_letter_count = subtitle['text'].length
+      total_time = subtitle['end'].to_f - subtitle['start'].to_f
+      # Check if the first and second words have 3 or fewer letters
+        word_clips = words.map do |word, i|
+          # if word.length < 4 && word.length > 1
+          #   p combined_word = "#{word} #{words[i+1]}"
+          #   word = combined_word
+          #   words[i+1] = ''
+            # p start
+          # length = subtitle['end'].to_f - subtitle['start'].to_f
+          length_word = ((word.length.to_f + 1)/ total_letter_count) * total_time
+          blur_body = {
+                  "asset": {
+                    "type": "html",
+                    # "html": "<p>#{subtitle['text']}</p>",
+                    "html": "<span class='text'>#{word.upcase}</span>",
+                    # "css": ".text { padding: 50px; background-color: #2175d9; line-height: 200px;font-size: 60px; color: #FFFFFF; font-family: \"Rubik Mono One\"; }"
+                    "css": "span { font-family: 'Montserrat ExtraBold'; color: #000000; font-size: 60px; text-align: center; }",
+                  },
+                  "start": start,
+                  "length": length_word,
+                  "offset": {
+                    "x": 0.005,
+                    "y": -0.005
+                }
+                }
+          start += length_word
+          blur_body
+            end
+     end
     #end of loop for the text header
-    # p segment_clips
+    p segment_clips
     vid_clips = [{
       "asset": {
           "type": "video",
@@ -157,9 +174,9 @@ class GenerateVideo
           {
               "clips": segment_clips.flatten
           },
-          # {
-          #     "clips": segment2_clips.flatten
-          # },
+          {
+              "clips": segment2_clips.flatten
+          },
           {
             "clips": vid_clips
           }
@@ -188,7 +205,7 @@ class GenerateVideo
       if get_video['response']['status'] == 'done'
         edited_video_url = get_video['response']['url']
         p edited_video_url
-        start_process - Time.now
+
         return edited_video_url
       end
     end
@@ -219,7 +236,8 @@ class GenerateVideo
       )
 
       # Print the transcribed text
-      p subtitles = response['segments']
+      response['segments'].last['text'].gsub('//', '')
+      subtitles = response['segments']
       return subtitles
 
     end
