@@ -3,6 +3,8 @@ Rails.application.routes.draw do
   root to: "pages#home"
   get '/sources/reddit', to: 'sources#reddit'
   get '/sources/video', to: 'sources#video'
+  get '/tos', to: 'pages#tos'
+  get '/privacy', to: 'pages#privacy'
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
