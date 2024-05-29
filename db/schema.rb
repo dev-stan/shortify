@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_24_053558) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_29_061527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,11 +57,23 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_053558) do
     t.index ["user_id"], name: "index_outputs_on_user_id"
   end
 
+  create_table "schedules", force: :cascade do |t|
+    t.datetime "publish_time"
+    t.bigint "output_id", null: false
+    t.string "platform"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["output_id"], name: "index_schedules_on_output_id"
+  end
+
   create_table "sources", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "url"
     t.string "location"
+    t.integer "font_size"
+    t.string "font_style"
+    t.string "font_family"
   end
 
   create_table "users", force: :cascade do |t|
@@ -80,4 +92,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_24_053558) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "outputs", "sources"
   add_foreign_key "outputs", "users"
+  add_foreign_key "schedules", "outputs"
 end

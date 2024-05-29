@@ -247,7 +247,7 @@ class GenerateVideo
     }.to_json, @headers)
 
     audio_response = JSON.parse(result_audio)
-    audio_id = audio_response["data"]["id"]
+    p audio_id = audio_response["data"]["id"]
     sleep 5
     result = JSON.parse(RestClient.get("https://api.shotstack.io/create/stage/assets/#{audio_id}",
                                        @headers))

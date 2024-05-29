@@ -29,6 +29,7 @@ end
 
   def show
     @output = Output.find(params[:id])
+    @schedule = Schedule.new
   end
 
   def download

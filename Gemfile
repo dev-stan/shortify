@@ -55,6 +55,7 @@ gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem 'curl', '~> 0.0.9'
 gem 'rest-client'
+gem "simple_calendar"
 
 group :development, :test do
   gem "dotenv-rails"
