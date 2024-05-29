@@ -1,0 +1,44 @@
+<!-- Button trigger modal -->
+<button type="button" class="cal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Schedule a Post
+</button>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Schedule post</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Schedule your post for the times when your audience is most active, or manually select a date and time in the future to publish your post.</p>
+        <%= simple_form_for([output, schedule], data: { controller: 'flatpickr' }) do |f| %>
+          <div class="d-flex bg-light border rounded-4">
+            <%= f.input :publish_time,
+                placeholder: Date.today.to_s,
+                as: :string,
+                input_html: {
+                  value: Date.today,
+                  data: {
+                    controller: "datepicker"
+                    # booking_price_target: 'start_date',
+                    # action: 'change->booking-price#update'
+                  },
+                  style: "background-color: transparent; border: none; text-align: center;",
+                  min: Date.today
+                },
+                wrapper_html: {
+                  class: 'mb-0 pb-3 border-end',
+                  style: 'margin-bottom: 0 !important'
+                } %>
+          </div>
+          <%= f.submit 'Post', class: 'btn-1' %>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn-1" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn-1">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

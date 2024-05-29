@@ -1,0 +1,47 @@
+<div class="simple-calendar">
+  <div class="calendar-heading">
+    <div class="d-flex align-items-center justify-content-between">
+      <nav>
+        <%= link_to t('simple_calendar.previous', default: 'Week'), calendar.url_for_previous_view, class: 'cal-btn-2' %>
+        <%= link_to t('simple_calendar.today', default: 'Month'), calendar.url_for_today_view, class: 'cal-btn-2' %>
+        <%= link_to t('simple_calendar.previous', default: '<'), calendar.url_for_previous_view, class: 'cal-btn' %>
+        <%= link_to t('simple_calendar.today', default: 'Today'), calendar.url_for_today_view, class: 'cal-btn-2' %>
+        <%= link_to t('simple_calendar.next', default: '>'), calendar.url_for_next_view, class: 'cal-btn' %>
+      </nav>
+      <%# <span class="calendar-title">
+      <%= t('simple_calendar.week', default: 'Week') %>
+      <%# <%= calendar.week_number %>
+      <%# <% if calendar.number_of_weeks > 1 %>
+      <%# - <%= calendar.end_week %>
+      <%# <% end %>
+      <%# </span> %>
+      <div>
+        <span class="calendar-title"><%= t('date.month_names')[start_date.month] %> <%= start_date.year %></span>
+      </div>
+      <div>
+        <%= link_to  'Schedule a Post', class: 'cal-btn' %>
+      </div>
+
+    </div>
+  </div>
+  <table class="table mt-2">
+    <thead>
+      <tr>
+        <% date_range.slice(0, 7).each do |day| %>
+          <th><%= t('date.abbr_day_names')[day.wday] %></th>
+        <% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% date_range.each_slice(7) do |dates| %>
+        <tr>
+          <% dates.each do |date| %>
+            <%= content_tag :td, class: calendar.td_classes_for(date) do %>
+              <% passed_block.call date.day, sorted_events.fetch(date, []) %>
+            <% end %>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

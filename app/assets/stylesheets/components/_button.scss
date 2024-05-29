@@ -1,5 +1,4 @@
 .main-button {
-
   font-weight: 600;
   width: 10%;
   height: 40px;
@@ -26,36 +25,22 @@
   // box-shadow: 0px 0px 70px 30px rgba(98, 47, 253, 0.6); /* Larger white shadow with 60% opacity */
 }
 
-.nav-button {
-  width: 80px;
-  height: 30px;
+.cal-btn {
+  width: 100%;
+  height: 40px;
+  font-weight: bold;
   border-radius: 12px;
-  background: #ffffff!important;
-  padding: 10px 30px 10px 30px;
+  background: #E4E1CD;
+  color: black;
+  padding: 10px 20px 10px 20px;
   text-decoration: none;
-  margin: 5px;
-  color: #6D4DFF;
-
-  a {
-    color: #6D4DFF;
-  }
-
 }
 
-.nav-button {
-  width: 80px;
-  height: 30px;
-  border-radius: 12px;
-  background: #ffffff!important;
-  padding: 10px 30px 10px 30px;
-  text-decoration: none;
-  margin: 5px;
-  color: #6D4DFF;
-
-  a {
-    color: #6D4DFF;
-  }
-
+.cal-btn:not([disabled]):focus {
+  box-shadow: 0 0 .25rem #E4E1CD, -.125rem -.125rem 1rem rgba(228, 225, 205, .5), .125rem .125rem 1rem rgba(228, 225, 205, .5);
+}
+.cal-btn:not([disabled]):hover {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(244, 198, 68, .5), .125rem .125rem 1rem rgba(244, 198, 68, .5);
 }
 
 .btn-1 {
@@ -84,4 +69,35 @@
 
 .btn-1:not([disabled]):hover {
   box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(244, 198, 68, .5), .125rem .125rem 1rem rgba(244, 198, 68, .5);
+}
+
+.cal-btn-2 {
+  font-weight: bold;
+  border: 0;
+  height: 40px;
+  border-radius: 12px;
+  color: #F4C644;
+  cursor: pointer;
+  display: inline-block;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.cal-btn-2:not([disabled]):focus {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(244, 198, 68, .5), .125rem .125rem 1rem rgba(244, 198, 68, .5);
+}
+
+.cal-btn-2:not([disabled]):hover {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(244, 198, 68, .5), .125rem .125rem 1rem rgba(244, 198, 68, .5);
+}
+
+.modal-btn {
+  width: 40%;
+  height: 40px;
+  font-weight: bold;
+  border-radius: 12px;
+  background: #F4C644;
+  color: black;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
 }
