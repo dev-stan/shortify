@@ -14,14 +14,14 @@ class RedditPost
 
   AUTH_URL = 'https://www.reddit.com/api/v1/access_token'
 
-  def top_post
+  def top_posts
     token = get_token
-    limit = 10
+    limit = 200
     after = nil
     suitable_posts = []
 
     n = 0
-    while suitable_posts.size < 10
+    while suitable_posts.size < 9
       n += 1
       break if n > 15
 
@@ -34,14 +34,14 @@ class RedditPost
 
         next if content.nil? || content.empty?
 
-        if content.split.size <= 350
+        if content.split.size <= 200 && suitable_posts.none? { |p| p[:id] == id }
           suitable_posts << { content: content, title: title, id: id }
-          break if suitable_posts.size == 10
+          break if suitable_posts.size == 9
         end
       end
     end
 
-    return suitable_posts.sample || { content: 'no', title: 'no', id: 0 }
+    return suitable_posts.size == 9 ? suitable_posts : [{ content: 'no', title: 'no', id: 0 }]
   end
 
   private
@@ -61,7 +61,7 @@ class RedditPost
   end
 
   def fetch_top_posts(token, limit: 1, after: nil)
-    top_posts_url = "https://oauth.reddit.com/r/#{@subreddit}/top?limit=#{limit}&t=week"
+    top_posts_url = "https://oauth.reddit.com/r/#{@subreddit}/top?limit=#{limit}&t=year"
     top_posts_url += "&after=#{after}" if after
     uri = URI(top_posts_url)
     req = Net::HTTP::Get.new(uri)
@@ -76,3 +76,8 @@ class RedditPost
     [data['children'].map { |post| post['data'] }, data['after']]
   end
 end
+
+# Usage example:
+# reddit = RedditPost.new('subreddit_name')
+# posts = reddit.top_posts
+# puts posts
