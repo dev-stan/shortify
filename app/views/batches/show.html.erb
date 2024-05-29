@@ -1,0 +1,32 @@
+<div class="row">
+  <%= simple_form_for @batch do |f| %>
+    <div class="col-6">
+      <div class="d-flex">
+        <% @sources.each_with_index do |source, index| %>
+          <div class="category-item ms-4">
+            <input class="form-check-input radio_buttons required category-selector" type="radio" value="<%= source.id %>" name="output[source_id]" id="card-<%= index %>" data-action="change->reddit-form#fetch_backend">
+            <label class="form-check-label collection_radio_buttons" for="card-<%= index %>"><%= render 'pages/source_card', source: source.video.key %></label>
+          </div>
+        <% end %>
+      </div>
+      <div class="label-text">
+        Font Size: <output id="rangevalue">12</output>
+        <%= f.input :font_size, label: false, as: :range, input_html: { value: 12, min: 1, max: 50, oninput: "rangevalue.value=value", class: "slider-input" } %>
+      </div>
+      <%= f.input :font_family, collection: Output::FONTFAMILIES, include_blank: false, wrapper: false, input_html: { class: 'mb-3 choice-input' }, label_html: { class: 'label-text' } %>
+      <%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false, wrapper: false, input_html: { class: 'mb-3 choice-input' }, label_html: { class: 'label-text' } %>
+      <div class="d-flex">
+        <% Output::VOICES.each do |voice| %>
+          <div class="voice-item">
+            <input class="form-check-input radio_buttons required voice-selector" type="radio" value="<%= voice %>" name="output[voice]" id="<%= voice %>" data-action="change->reddit-form#fetch_backend">
+            <label class="form-check-label collection_radio_buttons" for="<%= voice %>">Voice <%= voice %></label>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-6">
+      <%= render 'pages/examples_card', video_source: 'https://res.cloudinary.com/dcug1pvpk/video/upload/v1716529189/lazyreel-seeds/story-video-4.mp4' %>
+    </div>
+    <%= f.button :submit, "Create Video", class: "btn btn-secondary rounded-pill p-2 px-4" %>
+  <% end %>
+</div>
