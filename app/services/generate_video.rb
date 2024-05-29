@@ -1,10 +1,10 @@
 # app/services/openai_service.rb
 require "openai"
-require 'open-uri'
-require 'base64'
-require 'tempfile'
+require "open-uri"
+require "base64"
+require "tempfile"
 require "json"
-require 'rest-client'
+require "rest-client"
 
 class GenerateVideo
   attr_reader :mp3_url, :subtitles
@@ -13,203 +13,192 @@ class GenerateVideo
     @source_url = source_url
     @script = script
     @client = OpenAI::Client.new(
-      access_token: ENV['OPENAI_ACCESS_TOKEN'],
-      log_errors: true # Highly recommended in development, so you can see what errors OpenAI is returning. Not recommended in production.
+      access_token: ENV["OPENAI_ACCESS_TOKEN"],
+      log_errors: true, # Highly recommended in development, so you can see what errors OpenAI is returning. Not recommended in production.
     )
     @headers = {
-      'Content-Type' => 'application/json',
-      'Accept' => 'application/json',
-      'x-api-key' => ENV['SHOTSTACK_API']
-      }
-    @mp3_url = ''
+      "Content-Type" => "application/json",
+      "Accept" => "application/json",
+      "x-api-key" => ENV["SHOTSTACK_API"],
+    }
+    @mp3_url = "https://shotstack-create-api-stage-assets.s3.amazonaws.com/tao11s6mke/01hyw-a53dg-k8tx6-v8bh2-8qjz84.mp3"
     # sample mp3'https://shotstack-create-api-stage-assets.s3.amazonaws.com/tao11s6mke/01hyw-a53dg-k8tx6-v8bh2-8qjz84.mp3'
-    @subtitles =''
-      # sample subs[{"id"=>0, "seek"=>0, "start"=>0.0, "end"=>2.559999942779541, "text"=>" Hello, how are you? Bye.", "tokens"=>[50364, 2425, 11, 577, 366, 291, 30, 4621, 13, 50492], "temperature"=>0.0, "avg_logprob"=>-0.553535521030426, "compression_ratio"=>0.75, "no_speech_prob"=>0.00023138776305131614}]
+    @subtitles = [{"id"=>0, "seek"=>0, "start"=>0.0, "end"=>2.559999942779541, "text"=>" Hello, how are you? Bye.", "tokens"=>[50364, 2425, 11, 577, 366, 291, 30, 4621, 13, 50492], "temperature"=>0.0, "avg_logprob"=>-0.553535521030426, "compression_ratio"=>0.75, "no_speech_prob"=>0.00023138776305131614}]
+    # sample subs[{"id"=>0, "seek"=>0, "start"=>0.0, "end"=>2.559999942779541, "text"=>" Hello, how are you? Bye.", "tokens"=>[50364, 2425, 11, 577, 366, 291, 30, 4621, 13, 50492], "temperature"=>0.0, "avg_logprob"=>-0.553535521030426, "compression_ratio"=>0.75, "no_speech_prob"=>0.00023138776305131614}]
   end
+
   def final_video_link
-
-      p 'creating mp3'
-      @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
-      p 'creating subtitle'
-      @subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
-      p 'creating video'
-      generate_video(@subtitles)  # Generate video with the obtained
-
+    # p "creating mp3"
+    # @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
+    # p "creating subtitle"
+    # @subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
+    # p "creating video"
+    generate_video(@subtitles)  # Generate video with the obtained
   end
 
   # start_time += time_per_word
   private
 
   def generate_video(subtitles)
+    last_word_endtime = subtitles.last["end"].to_f
+    font_family = "\"Lilita One\""
+    # 'Montserrat ExtraBold', \"Open Sans\"
+    font_size = "60px"
+    css = "span { font-family: #{font_family}; color: #ffffff; font-size: #{font_size}; text-align: center; }"
+    css2 = "span { font-family: #{font_family}; color: #000000; font-size: #{font_size}; text-align: center; }"
 
-    last_word_endtime = subtitles.last['end'].to_f
-    css = "span { background: white; font-family: \"Lato\"; font-size: 60px;color: #000000;font-weight: bold;font-style: normal;text-decoration: none;line-height: 200;padding: 10;}"
-
-    segment_clips = subtitles.map do |subtitle|
-      start = subtitle['start'].to_f
-      words = subtitle['text'].split
-      total_letter_count = subtitle['text'].length
-      total_time = subtitle['end'].to_f - subtitle['start'].to_f
+    modified_words = []
+    segment_clips = []
+    segment2_clips = []
+    subtitles.each do |subtitle|
+      start = subtitle["start"].to_f
+      words = subtitle["text"].split
+      total_letter_count = subtitle["text"].length
+      total_time = subtitle["end"].to_f - subtitle["start"].to_f
       # Check if the first and second words have 3 or fewer letters
-      api_body = []
-      modified_words = []
       words.each_with_index do |word, i|
         if word.length < 4 && word.length >= 1
-          combined_word = "#{word} #{words[i+1]}"
-          words[i+1] = ''
+          combined_word = "#{word} #{words[i + 1]}"
+          words[i + 1] = ""
           modified_words << combined_word
-        elsif word == ''
+        elsif word == ""
           next
         else
           modified_words << word
         end
       end
-
       modified_words.map do |word|
-        length_word = ((word.length.to_f + 1)/ total_letter_count) * total_time
+        length_word = ((word.length.to_f + 1) / total_letter_count) * total_time
         body = {
-            "asset": {
-              "type": "html",
-              # "html": "<p>#{subtitle['text']}</p>",
-              "html": "<span class='text'>#{word.upcase}</span>",
-              # "html": "<table border='\''0'\''><tr><td><h1>#{word.upcase}</h1></td></tr></table>",
-              # "css": ".text { padding: 50px; background-color: #2175d9; line-height: 60px;font-size: 60px; color: #FFFFFF; font-family: \"Rubik Mono One\"; }"
-              # "html": "<span>#{word.upcase}</span>",
-              # "css": "span { font-family: 'Indie Flower'; color: #80ffffff; font-size: 60px ;}",
-              #"css": "span { font-family: 'Montserrat ExtraBold'; color: #80000000; font-size: 60px ;background-color: #80000000;}",
-              # "height": 60,
-              # "background": "#80ffffff"
-              "css": "span { font-family: 'Montserrat ExtraBold'; color: #ffffff; font-size: 60px; text-align: center; }",
-              # "css": "table { background-color: #000000; } td { padding-top: 10px; padding-bottom: 10px; } h1 { color: #FFFFFF; font-size: 34px; font-family: '\''Open Sans'\''; font-weight: bold; margin: 60px; text-align: center; }",
-              # "width": 300,
-              # "html": "<table cellpadding='\''16'\''><tr><td><p>#{word.upcase}</p></td></tr></table>",
-              # "css": "table { background-color: #33000000; } p { color: #FFFFFF; font-size: 100px; font-family: '\''Open Sans'\'' }",
-              # "position": "center",
-              # "height": 100
-            },
-            "start": start,
-            "length": length_word,
-            # "position": "center",
-          #   "transition": {
-          #                   "in": "fade",
-          #                   "out": "fade"
-          # }
+          "asset": {
+            "type": "html",
+            # "html": "<p>#{subtitle['text']}</p>",
+            "html": "<span class='text'>#{word.upcase}</span>",
+            # "html": "<table border='\''0'\''><tr><td><h1>#{word.upcase}</h1></td></tr></table>",
+            # "css": ".text { padding: 50px; background-color: #2175d9; line-height: 60px;font-size: 60px; color: #FFFFFF; font-family: \"Rubik Mono One\"; }"
+            # "html": "<span>#{word.upcase}</span>",
+            # "css": "span { font-family: 'Indie Flower'; color: #80ffffff; font-size: 60px ;}",
+            #"css": "span { font-family: 'Montserrat ExtraBold'; color: #80000000; font-size: 60px ;background-color: #80000000;}",
+            # "height": 60,
+            # "background": "#80ffffff"
+            "css": css,
+          # "css": "table { background-color: #000000; } td { padding-top: 10px; padding-bottom: 10px; } h1 { color: #FFFFFF; font-size: 34px; font-family: '\''Open Sans'\''; font-weight: bold; margin: 60px; text-align: center; }",
+          # "width": 300,
+          # "html": "<table cellpadding='\''16'\''><tr><td><p>#{word.upcase}</p></td></tr></table>",
+          # "css": "table { background-color: #33000000; } p { color: #FFFFFF; font-size: 100px; font-family: '\''Open Sans'\'' }",
+          # "position": "center",
+          # "height": 100
+          },
+          "start": start,
+          "length": length_word,
+          "offset": {
+            "x": 0,
+            "y": 0,
+          },
+        # "position": "center",
+        #   "transition": {
+        #                   "in": "fade",
+        #                   "out": "fade"
+        # }
+        }
+        blur_body = {
+          "asset": {
+            "type": "html",
+            # "html": "<p>#{subtitle['text']}</p>",
+            "html": "<span class='text'>#{word.upcase}</span>",
+            # "css": ".text { padding: 50px; background-color: #2175d9; line-height: 200px;font-size: 60px; color: #FFFFFF; font-family: \"Rubik Mono One\"; }"
+            "css": css2,
+          },
+          "start": start,
+          "length": length_word,
+          "offset": {
+            "x": 0.005,
+            "y": -0.005,
+          },
         }
         start += length_word
-        api_body << body
+        segment_clips << body
+        segment2_clips << blur_body
       end
-      api_body
+      [segment_clips, segment2_clips]
     end
-    segment2_clips = subtitles.map do |subtitle|
-      start = subtitle['start'].to_f
-      words = subtitle['text'].split
-      total_letter_count = subtitle['text'].length
-      total_time = subtitle['end'].to_f - subtitle['start'].to_f
-      # Check if the first and second words have 3 or fewer letters
-        word_clips = words.map do |word, i|
-          # if word.length < 4 && word.length > 1
-          #   p combined_word = "#{word} #{words[i+1]}"
-          #   word = combined_word
-          #   words[i+1] = ''
-            # p start
-          # length = subtitle['end'].to_f - subtitle['start'].to_f
-          length_word = ((word.length.to_f + 1)/ total_letter_count) * total_time
-          blur_body = {
-                  "asset": {
-                    "type": "html",
-                    # "html": "<p>#{subtitle['text']}</p>",
-                    "html": "<span class='text'>#{word.upcase}</span>",
-                    # "css": ".text { padding: 50px; background-color: #2175d9; line-height: 200px;font-size: 60px; color: #FFFFFF; font-family: \"Rubik Mono One\"; }"
-                    "css": "span { font-family: 'Montserrat ExtraBold'; color: #000000; font-size: 60px; text-align: center; }",
-                  },
-                  "start": start,
-                  "length": length_word,
-                  "offset": {
-                    "x": 0.005,
-                    "y": -0.005
-                }
-                }
-          start += length_word
-          blur_body
-            end
-     end
-    #end of loop for the text header
-    p segment_clips
     vid_clips = [{
       "asset": {
-          "type": "video",
-          "src": @source_url,
-          "volume": 0
+        "type": "video",
+        "src": @source_url,
+        "volume": 0,
       },
       "start": 0,
       "length": last_word_endtime + 1,
       "transition": {
-          "out": "fade"
-      }
+        "out": "fade",
+      },
     }]
 
-#body for the api request
+    #body for the api request
     result = {
       "timeline": {
         "soundtrack": {
           "src": @mp3_url,
-          "effect": "fadeOut"
-      },
+          "effect": "fadeOut",
+        },
 
-      "background": "#000000",
-      "fonts": [
-        {
-            "src": "https://drive.google.com/uc?export=download&id=1D8p_OymO_DrnELh-V9fmKtWd14zr7CZH"
-            # "src": "https://drive.google.com/uc?export=download&id=1H0ngg6u4uU2kA5ewsNqcJWzyi8VPJq1T"
-            #"src": "https://drive.google.com/uc?export=download&id=1LuLfTcGJt-A1sCQ55iCEI4042XlrOHWM"
-        },
-        {
-            "src": "https://shotstack-assets.s3-ap-southeast-2.amazonaws.com/fonts/OpenSans-Regular.ttf"
-        },
-        {
-            "src": "https://shotstack-assets.s3-ap-southeast-2.amazonaws.com/fonts/IndieFlower-Regular.ttf"
-        }
-      ],
-      "tracks": [
+        "background": "#000000",
+        "fonts": [
           {
-              "clips": segment_clips.flatten
+            "src": "https://drive.google.com/uc?export=download&id=1D8p_OymO_DrnELh-V9fmKtWd14zr7CZH",
+          # "src": "https://drive.google.com/uc?export=download&id=1H0ngg6u4uU2kA5ewsNqcJWzyi8VPJq1T"
+          #"src": "https://drive.google.com/uc?export=download&id=1LuLfTcGJt-A1sCQ55iCEI4042XlrOHWM"
           },
           {
-              "clips": segment2_clips.flatten
+            "src": "https://shotstack-assets.s3-ap-southeast-2.amazonaws.com/fonts/OpenSans-Regular.ttf",
           },
           {
-            "clips": vid_clips
-          }
-        ]
+            "src": "https://shotstack-assets.s3-ap-southeast-2.amazonaws.com/fonts/IndieFlower-Regular.ttf",
+          },
+          {
+            "src": "https://shotstack-assets.s3-ap-southeast-2.amazonaws.com/fonts/LilitaOne-Regular.ttf",
+          },
+        ],
+        "tracks": [
+          {
+            "clips": segment_clips.flatten,
+          },
+          {
+            "clips": segment2_clips.flatten,
+          },
+          {
+            "clips": vid_clips,
+          },
+        ],
       },
       "output": {
         "format": "mp4",
         "resolution": "hd",
-        "aspectRatio": "9:16"
-      }
+        "aspectRatio": "9:16",
+      },
     }
     p result.to_json
-        create_video = RestClient.post("https://api.shotstack.io/edit/stage/render",
-    result.to_json, @headers)
-
-    p create_video
-    video_response = JSON.parse(create_video)
-    video_id = video_response['response']['id']
+    create_video = RestClient.post("https://api.shotstack.io/edit/stage/render",
+                                   result.to_json, @headers)
+    # p create_video
+    p video_response = JSON.parse(create_video)
+    video_id = video_response["response"]["id"]
+    get_video = JSON.parse(RestClient.get("https://api.shotstack.io/edit/stage/render/#{video_id}", @headers))
     p start_process = Time.now
-    get_video = JSON.parse(RestClient.get("https://api.shotstack.io/edit/stage/render/#{video_id}", @headers))
-    while get_video['response']['status'] != 'done'
-    get_video = JSON.parse(RestClient.get("https://api.shotstack.io/edit/stage/render/#{video_id}", @headers))
-      p get_video['response']['status']
+    while get_video["response"]["status"] != "done"
+      get_video = JSON.parse(RestClient.get("https://api.shotstack.io/edit/stage/render/#{video_id}", @headers))
+      p get_video["response"]["status"]
+      p Time.now - start_process
       sleep 2
-      p 'processing video....'
-      if get_video['response']['status'] == 'done'
-        edited_video_url = get_video['response']['url']
+      p "processing video...."
+      if get_video["response"]["status"] == "done"
+        edited_video_url = get_video["response"]["url"]
         p edited_video_url
 
         return edited_video_url
       end
     end
-
   end
 
   def call_whisper(mp3_url)
@@ -218,7 +207,7 @@ class GenerateVideo
     mp3_data = URI.open(mp3_url).read
 
     # Write mp3 data to a temporary file
-    Tempfile.create(['audio', '.mp3'], encoding: 'binary') do |file|
+    Tempfile.create(["audio", ".mp3"], encoding: "binary") do |file|
       file.binmode # Ensure the file is in binary mode
       file.write(mp3_data)
       file.rewind
@@ -229,62 +218,55 @@ class GenerateVideo
           model: "whisper-1",
           file: file,
           language: "en", # Optional
-          transcription: 'srt',
-          timestamp_granularities: ['segment'],
-          response_format: 'verbose_json'
-        }
+          transcription: "srt",
+          timestamp_granularities: ["segment"],
+          response_format: "verbose_json",
+        },
       )
 
       # Print the transcribed text
-      response['segments'].last['text'].gsub('//', '')
-      subtitles = response['segments']
+      response["segments"].last["text"].gsub("//", "")
+      subtitles = response["segments"]
       return subtitles
-
     end
   end
 
-
-
   def create_mp3(script)
-
-    result_audio = RestClient.post('https://api.shotstack.io/create/stage/assets',
-    {
+    result_audio = RestClient.post("https://api.shotstack.io/create/stage/assets",
+                                   {
       "provider": "shotstack",
       "options": {
         "type": "text-to-speech",
         "text": script,
         "voice": "Matthew",
         "language": "en-US",
-        "newscaster": false
-      }
+        "newscaster": false,
+      },
     }.to_json, @headers)
 
-
     audio_response = JSON.parse(result_audio)
-    p audio_id = audio_response['data']['id']
+    p audio_id = audio_response["data"]["id"]
     sleep 5
     result = JSON.parse(RestClient.get("https://api.shotstack.io/create/stage/assets/#{audio_id}",
-    @headers))
-    status = result['data']['attributes']['status']
-    if status == 'done'
-      return mp3_url = result['data']['attributes']['url']
+                                       @headers))
+    status = result["data"]["attributes"]["status"]
+    if status == "done"
+      return mp3_url = result["data"]["attributes"]["url"]
     else
-      while status != 'done'
+      while status != "done"
         result = JSON.parse(RestClient.get("https://api.shotstack.io/create/stage/assets/#{audio_id}", @headers))
-          p status
-          sleep 2
-          p 'processing speech result....'
-          if status == 'done'
-            mp3_url = result['data']['attributes']['url']
-            p mp3_url
-            return mp3_url
-          end
+        p status
+        sleep 2
+        p "processing speech result...."
+        if status == "done"
+          mp3_url = result["data"]["attributes"]["url"]
+          p mp3_url
+          return mp3_url
         end
       end
+    end
     # result_mp3 = JSON.parse(result)
     # p mp3_url = result_mp3['data']['attributes']['url']
     # return mp3_url
   end
-
-
 end
