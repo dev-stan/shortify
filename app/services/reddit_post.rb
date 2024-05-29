@@ -30,16 +30,18 @@ class RedditPost
       top_posts.each do |post|
         content = post['selftext']
         title = post['title']
+        id = post['id']
+
         next if content.nil? || content.empty?
 
         if content.split.size <= 350
-          suitable_posts << { content: content, title: title }
+          suitable_posts << { content: content, title: title, id: id }
           break if suitable_posts.size == 10
         end
       end
     end
 
-    return suitable_posts.sample || { content: 'no', title: 'no' }
+    return suitable_posts.sample || { content: 'no', title: 'no', id: 0 }
   end
 
   private
