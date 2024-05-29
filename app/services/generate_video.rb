@@ -21,18 +21,18 @@ class GenerateVideo
       "Accept" => "application/json",
       "x-api-key" => ENV["SHOTSTACK_API"],
     }
-    @mp3_url = "https://shotstack-create-api-stage-assets.s3.amazonaws.com/tao11s6mke/01hyw-a53dg-k8tx6-v8bh2-8qjz84.mp3"
+    @mp3_url = ""
     # sample mp3'https://shotstack-create-api-stage-assets.s3.amazonaws.com/tao11s6mke/01hyw-a53dg-k8tx6-v8bh2-8qjz84.mp3'
-    @subtitles = [{"id"=>0, "seek"=>0, "start"=>0.0, "end"=>2.559999942779541, "text"=>" Hello, how are you? Bye.", "tokens"=>[50364, 2425, 11, 577, 366, 291, 30, 4621, 13, 50492], "temperature"=>0.0, "avg_logprob"=>-0.553535521030426, "compression_ratio"=>0.75, "no_speech_prob"=>0.00023138776305131614}]
+    @subtitles = ''
     # sample subs[{"id"=>0, "seek"=>0, "start"=>0.0, "end"=>2.559999942779541, "text"=>" Hello, how are you? Bye.", "tokens"=>[50364, 2425, 11, 577, 366, 291, 30, 4621, 13, 50492], "temperature"=>0.0, "avg_logprob"=>-0.553535521030426, "compression_ratio"=>0.75, "no_speech_prob"=>0.00023138776305131614}]
   end
 
   def final_video_link
-    # p "creating mp3"
-    # @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
-    # p "creating subtitle"
-    # @subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
-    # p "creating video"
+    p "creating mp3"
+    @mp3_url = create_mp3(@script)  # Ensure MP3 is created first and the URL is stored
+    p "creating subtitle"
+    @subtitles = call_whisper(@mp3_url)  # Pass the stored MP3 URL to Whisper
+    p "creating video"
     generate_video(@subtitles)  # Generate video with the obtained
   end
 
@@ -47,10 +47,10 @@ class GenerateVideo
     css = "span { font-family: #{font_family}; color: #ffffff; font-size: #{font_size}; text-align: center; }"
     css2 = "span { font-family: #{font_family}; color: #000000; font-size: #{font_size}; text-align: center; }"
 
-    modified_words = []
     segment_clips = []
     segment2_clips = []
     subtitles.each do |subtitle|
+      modified_words = []
       start = subtitle["start"].to_f
       words = subtitle["text"].split
       total_letter_count = subtitle["text"].length
@@ -66,7 +66,9 @@ class GenerateVideo
         else
           modified_words << word
         end
+
       end
+
       modified_words.map do |word|
         length_word = ((word.length.to_f + 1) / total_letter_count) * total_time
         body = {
@@ -225,7 +227,7 @@ class GenerateVideo
       )
 
       # Print the transcribed text
-      response["segments"].last["text"].gsub("//", "")
+      response['segments'].last["text"].gsub("//", "")
       subtitles = response["segments"]
       return subtitles
     end
@@ -245,7 +247,7 @@ class GenerateVideo
     }.to_json, @headers)
 
     audio_response = JSON.parse(result_audio)
-    p audio_id = audio_response["data"]["id"]
+    audio_id = audio_response["data"]["id"]
     sleep 5
     result = JSON.parse(RestClient.get("https://api.shotstack.io/create/stage/assets/#{audio_id}",
                                        @headers))
@@ -266,7 +268,7 @@ class GenerateVideo
       end
     end
     # result_mp3 = JSON.parse(result)
-    # p mp3_url = result_mp3['data']['attributes']['url']
+    mp3_url = result_mp3['data']['attributes']['url']
     # return mp3_url
   end
 end
