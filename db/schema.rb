@@ -71,9 +71,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_061527) do
     t.datetime "updated_at", null: false
     t.string "url"
     t.string "location"
-    t.integer "font_size"
-    t.string "font_style"
-    t.string "font_family"
   end
 
   create_table "users", force: :cascade do |t|
