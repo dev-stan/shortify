@@ -10,8 +10,10 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "posts#index"
 
-resources :batches, only: [:update, :edit, :new, :create, :show]
-resources :outputs, only: [:index]
-get '/download_video', to: 'outputs#download', as: 'download_video'
+  resources :batches, only: [:update, :edit, :new, :create, :show]
+  resources :outputs, only: [:index] do
+    resources :schedules, only: [:create]
+  end
+  get '/download_video', to: 'outputs#download', as: 'download_video'
 
 end

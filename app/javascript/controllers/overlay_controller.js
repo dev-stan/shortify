@@ -19,6 +19,7 @@ import { Controller } from "@hotwired/stimulus"
 
     fontstyle(event){
       const fontStyle = event.currentTarget.value;
+      console.log(fontStyle);
       this.textTarget.style.fontStyle = fontStyle;
     }
 

@@ -70,6 +70,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_091058) do
     t.index ["user_id"], name: "index_outputs_on_user_id"
   end
 
+  create_table "schedules", force: :cascade do |t|
+    t.datetime "publish_time"
+    t.bigint "output_id", null: false
+    t.string "platform"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["output_id"], name: "index_schedules_on_output_id"
+  end
+
   create_table "sources", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -95,4 +104,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_091058) do
   add_foreign_key "outputs", "batches"
   add_foreign_key "outputs", "sources"
   add_foreign_key "outputs", "users"
+  add_foreign_key "schedules", "outputs"
 end
