@@ -2,7 +2,7 @@
   <% posts.each do |post| %>
     <div class="col-md-4 mb-4">
       <%= check_box_tag "selected_posts[]", post[:content], false, id: "post_#{post[:id]}", class: 'form-check-input check_boxes optional r-tag-selector' %>
-      <%= label_tag "post_#{post[:id]}", post[:title], class: 'form-check-label collection_check_boxes' %>
+      <%= label_tag "post_#{post[:id]}", truncate(post[:title], length: 80), class: 'form-check-label collection_check_boxes' %>
     </div>
   <% end %>
 </div>

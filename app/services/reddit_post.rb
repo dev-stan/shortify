@@ -34,7 +34,7 @@ class RedditPost
 
         next if content.nil? || content.empty?
 
-        if content.split.size <= 200 && suitable_posts.none? { |p| p[:id] == id }
+        if content.split.size <= 250 && suitable_posts.none? { |p| p[:id] == id }
           suitable_posts << { content: content, title: title, id: id }
           break if suitable_posts.size == 9
         end

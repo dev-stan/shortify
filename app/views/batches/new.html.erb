@@ -1,11 +1,19 @@
 <div class="container mt-5 text-white" data-controller="reddit-form">
   <div class="row">
     <div class="col-6">
-      <div class="d-flex flex-wrap">
-        <%= form_with url: batches_reddit_path, method: :get, html: { data: { action: "change->reddit-form#fetch_backend" }, id: 'reddit' } do |f| %>
-          <div class=" category-item">
-            <%= radio_button_tag(:query, 'stories', params[:query] == 'askreddit', class: "form-check-input check_boxes optional tag-selector", id: "stories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
-            <%= label_tag(:stories, 'r/Stories', class: "form-check-label collection_check_boxes") %>
+      <div class="d-flex flex-column h-100">
+        <div style="height: 40%">
+          <h1 style="font-size: 60px">Choose an interesting <span style="color: #F4C644">story</span> to tell...</h1>
+          <p style="color: #6d6d6d">This will be the base of your video, your script and your content...</p>
+        </div>
+        <%= form_with url: batches_reddit_path, method: :get, id: 'reddit'  do |f| %>
+          <div class="d-flex flex-wrap" style="height: 60%">
+            <% @subs.each do |subreddit| %>
+              <div class="category-item">
+                <%= radio_button_tag(:query, subreddit, params[:query] == subreddit, class: "form-check-input check_boxes optional tag-selector", id: subreddit, data: { action: "change->reddit-form#fetch_backend" }) %>
+                <%= label_tag(subreddit.to_sym, "r/#{subreddit}", class: "form-check-label collection_check_boxes") %>
+              </div>
+            <% end %>
           </div>
         <% end %>
       </div>
