@@ -11,7 +11,7 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
     @output = Output.find(params[:output_id])
-    @schedule.output = @output.url
+    @schedule.output = @output
     if @schedule.save
       redirect_to output_schedules_path
       puts 'saved'
