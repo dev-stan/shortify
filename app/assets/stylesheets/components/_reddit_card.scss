@@ -15,15 +15,15 @@
   cursor: pointer;
   border-radius: 16px;
   background-color: #131213;
-  color: white;
-  border: 3px solid white;
+  color: #E4E1CD;
   width: 200px;
   height: 200px;
+  transition: all 500ms ease; /* Apply transition to the main button state */
 }
 
 .r-tag-selector:checked + label {
-  border: 3px solid #7E73FF;
-  color: white;
+  color: #131213;
+  background-color: #E4E1CD;
 }
 
 
@@ -38,8 +38,7 @@
   cursor: pointer;
   border-radius: 16px;
   background-color: #131213;
-  color: white;
-  border: 3px solid white;
+  color: #131213;
   width: 200px;
   height: 200px;
 }
