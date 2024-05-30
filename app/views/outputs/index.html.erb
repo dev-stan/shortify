@@ -1,8 +1,8 @@
 <h1>Your Videos:</h1>
-<div class="container d-flex mb-6" data-controller="video">
-  <div class="row">
+<div class="container mb-6" data-controller="video">
+  <div class="row d-flex justify-content-evenly">
     <% @outputs.each do |output|%>
-      <div class="col-3">
+      <div class="col-2">
         <%= link_to output_path(output) do %> <%= render 'output_card', output: output %> <% end %>
       </div>
     <% end %>
