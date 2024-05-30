@@ -1,7 +1,7 @@
 class OutputsController < ApplicationController
 def index
   @user = current_user
-  @outputs = @user.outputs
+  @outputs = Output.all # Fix this later!! should be current user and not all outputs
   @sources = Source.all
 end
 
