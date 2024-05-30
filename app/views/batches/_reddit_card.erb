@@ -1,8 +1,28 @@
 <div class="row d-flex">
   <% posts.each do |post| %>
-    <div class="col-md-4 mb-4">
+    <div class="col-md-4 mb-4 position-relative label-icon">
       <%= check_box_tag "selected_posts[]", post[:content], false, id: "post_#{post[:id]}", class: 'form-check-input check_boxes optional r-tag-selector' %>
-      <%= label_tag "post_#{post[:id]}", truncate(post[:title], length: 80), class: 'form-check-label collection_check_boxes' %>
+      <label for="post_<%= post[:id]%>" class='form-check-label collection_check_boxes'><%= truncate(post[:title], length: 80) %> </label>
+      <i class="fa-solid fa-book-open-reader icon-absolute" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+      <%#= label_tag "post_#{post[:id]}", truncate(post[:title], length: 80), class: 'form-check-label collection_check_boxes' %>
+    </div>
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><%= truncate(post[:title], length: 16) %></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <%= post[:content] %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>
+<!-- Modal -->
