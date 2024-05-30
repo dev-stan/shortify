@@ -34,14 +34,13 @@
   color: black;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
+  transition: all 1500ms ease;
+  &:hover {
+    background: #F4C644;
+  }
 }
 
-.cal-btn:not([disabled]):focus {
-  box-shadow: 0 0 .25rem #E4E1CD, -.125rem -.125rem 1rem rgba(228, 225, 205, .5), .125rem .125rem 1rem rgba(228, 225, 205, .5);
-}
-.cal-btn:not([disabled]):hover {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(244, 198, 68, .5), .125rem .125rem 1rem rgba(244, 198, 68, .5);
-}
+
 
 .btn-1 {
   background: #F4C644;
@@ -80,15 +79,12 @@
   display: inline-block;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
+  &:hover {
+    background: #F4C644;
+    color: black;
+  }
 }
 
-.cal-btn-2:not([disabled]):focus {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(244, 198, 68, .5), .125rem .125rem 1rem rgba(244, 198, 68, .5);
-}
-
-.cal-btn-2:not([disabled]):hover {
-  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(244, 198, 68, .5), .125rem .125rem 1rem rgba(244, 198, 68, .5);
-}
 
 .modal-btn {
   font-weight: bold;
