@@ -1,6 +1,8 @@
 source "https://rubygems.org"
 
 ruby "3.1.2"
+gem "sidekiq", "~> 7"
+gem "sidekiq-failures"
 
 gem "cloudinary"
 
