@@ -1,23 +1,24 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
-    <%= link_to "/", class: "navbar-brand d-flex align-items-center" do %>
-      <%= image_tag ("Shortify_logo.png")%>
+    <%= link_to "/", class: "navbar-brand d-flex align-items-center logo" do %>
+      <%= image_tag ("shortifylogo.png")%>
+      <div class="logo">SHORTIFY</div>
     <% end %>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
          <li class="nav-item">
-            <%= link_to "", "/schedules", class: "button2 fa-solid fa-calendar-days" %>
+            <%= link_to "Planner", "/schedules", class: "button2" %>
           </li>
           <li class="nav-item">
             <%= link_to "Your Videos", "/outputs", class: "button2" %>
           </li>
           <li class="nav-item active">
-            <%= link_to "Create Video", "/sources", class: "button" %>
+            <%= link_to "Create", "/batches/new", class: "button" %>
           </li>
           <li class="nav-item">
             <%= link_to destroy_user_session_path, class: "button2 p-2", data: {turbo_method: :delete} do %>
-              <i class="fa-solid fa-door-open"></i>
+              Log-out
             <% end %>
           </li>
         <% else %>
