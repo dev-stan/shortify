@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   get '/tos', to: 'pages#tos'
   get '/privacy', to: 'pages#privacy'
   get "up" => "rails/health#show", as: :rails_health_check
-
+  require "sidekiq/web"
+  # authenticate :user, ->(user) do
+  mount Sidekiq::Web => '/sidekiq'
+  # end
   resources :batches, only: [:update, :edit, :new, :create, :show]
   resources :outputs, only: [:index, :show, :new, :create] do
     resources :schedules, only: [:create]

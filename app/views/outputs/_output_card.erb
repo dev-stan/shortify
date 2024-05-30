@@ -1,6 +1,6 @@
 <div class="d-flex mb-2">
   <div class="output_card">
-    <% if output.url.present? %>
+    <% if output.url.present? && output.url.end_with?('.mp4') %>
       <%= video_tag output.url, height: 1080, width: 1920, controls: false, autoplay: false, muted: true, data: { action: "mouseover->video#play" } %>
     <% else %>
       <p>Video URL is missing.</p>
@@ -15,7 +15,7 @@
       <%= link_to '/', class: 'link tiktok' do %>
         <i class="fa-brands fa-tiktok"></i>
       <% end %>
-      <% if output.url.present? %>
+      <% if output.url.present? && output.url.end_with?('.mp4') %>
         <%= link_to output.url, class: 'link download', download: output.url do %>
           <i class="fa-solid fa-download"></i>
         <% end %>
