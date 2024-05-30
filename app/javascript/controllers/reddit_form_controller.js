@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["title", "fsubmit", "stories"]
+  static targets = ["stories"]
 
   connect() {
     console.log("Controller connected");
@@ -23,6 +23,7 @@ export default class extends Controller {
         items.forEach(item => item.classList.remove('active'));
 
         // Insert the new HTML content
+        this.storiesTarget.innerHTML = ''
         this.storiesTarget.insertAdjacentHTML('afterbegin', data.html);
       });
   }

@@ -1,0 +1,44 @@
+.r-tag-selector {
+  position: absolute;
+  transform: scale(0);
+}
+
+
+.r-tag-selector + label {
+  font-weight: 500;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 16px;
+  background-color: #131213;
+  color: #E4E1CD;
+  width: 200px;
+  height: 200px;
+  transition: all 500ms ease; /* Apply transition to the main button state */
+}
+
+.r-tag-selector:checked + label {
+  color: #131213;
+  background-color: #E4E1CD;
+}
+
+
+.fake-reddit-card {
+  font-weight: 500;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 16px;
+  background-color: #131213;
+  color: #131213;
+  width: 200px;
+  height: 200px;
+}
