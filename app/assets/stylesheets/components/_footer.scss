@@ -1,18 +1,19 @@
 .footer {
-  background: #F4C644;
+  background:black;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 100px;
   padding: 0px 50px;
   color: rgba(0,0,0,0.3);
+  border-top: #F4C644 1px;
 }
 .footer-links {
   display: flex;
   align-items: center;
 }
 .footer-links a {
-  color: black;
+  color: #F4C644;
   opacity: 0.15;
   text-decoration: none;
   font-size: 32px;
