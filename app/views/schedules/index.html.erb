@@ -3,8 +3,8 @@
     <%= date %>
     <% schedules.each do |schedule| %>
       <div class='schedule'>
-        <%= schedule.output %>
-        <%= schedule.publish_time %>
+        <strong><%= truncate(schedule.output.suggested_title.gsub('"',''), length: 24) %></strong>
+        <i class="fa-brands fa-tiktok"></i>
       </div>
     <% end %>
   <% end %>
