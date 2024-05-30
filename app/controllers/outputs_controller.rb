@@ -11,20 +11,22 @@ end
   end
 
   def create
-    @output = Output.new(output_params)
-    @output.url = GenerateVideo.new(@output.source.url, @output.script).final_video_link
-    @output.user = current_user
-        if @output.save
-      redirect_to output_path(@output)
-      puts 'saved'
-      flash.notice = "Output created."
-    else
-      render 'pages/home', status: :unprocessable_entity
-      puts 'not saved'
-      p @output.valid?
-      p @output.errors.messages
-      flash.alert = "Output failed."
+    params[:selected_posts].each do |script|
+      @output = Output.new(source: Source.first) #@output = Output.new(output_params)
+      @output.script = script
+      # @output.script = GenerateVideo.new(script).final_video_link
+      @output.user = current_user
+      if @output.save
+        puts 'saved'
+      else
+        render 'pages/sources', status: :unprocessable_entity
+        puts 'not saved'
+        p @output.valid?
+        p @output.errors.messages
+        flash.alert = "Output failed."
+      end
     end
+    redirect_to sources_video_path
   end
 
   def show
