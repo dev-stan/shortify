@@ -5,29 +5,30 @@
       <div class="col-4 mt-3">
         <%= render 'output_show_card', source: @output.url, output: @output %>
       </div>
-      <div class="col-6 border border-light rounded p-3">
-        <div class="col-6">
-          <%= render 'schedules/schedule_post', schedule: @schedule, output: @output %>
+      <div class="col-8">
+        <div class="row">
+          <div class="col-4 mb-2">
+            <%= render 'schedules/schedule_post', schedule: @schedule, output: @output %>
+          </div>
+          <div class="col-8"></div>
+          <div class="col-6 text-card">
+            <h2 class="card-header">Video Details</h2>
+            <p><c class="text-decoration-underline fw-bold">Created on:  </c><%= @output.created_at %></p>
+            <p><c class="text-decoration-underline fw-bold">Script:  </c> <%= @output.script %></p>
+            <div class="button_container d-flex justify-content-around border-0">
+              <%= link_to '/', class: 'show-link yt' do %><i class="fa-brands fa-youtube"></i><% end %>
+              <%= link_to '/', class: 'show-link insta' do %><i class="fa-brands fa-instagram"></i><% end %>
+              <%= link_to '/', class: 'show-link tiktok' do %><i class="fa-brands fa-tiktok"></i><% end %>
+              <%= link_to @output.url, class: 'show-link download', download: @output.url do %><i class="fa-solid fa-download"></i><% end %>
+            </div>
+          </div>
+          <div class="col-6 text-card">
+            <h2 class="card-header">Sharing Suggestions</h2>
+            <p><c class="text-decoration-underline fw-bold">Suggested Video Title:  </c><%= @output.suggested_title %></p>
+            <p><c class="text-decoration-underline fw-bold">Suggested Video Description:  </c> <%= @output.suggested_description %></p>
+            <p><c class="text-decoration-underline fw-bold">Suggested Hashtags:  </c> <%= @output.suggested_hashtags %></p>
+          </div>
         </div>
-        <h2 class="text-decoration-underline mt-2">Video Details</h2>
-        <p><c class="text-decoration-underline fw-bold">Created on:  </c><%= @output.created_at %></p>
-        <p><c class="text-decoration-underline fw-bold">Script:  </c> <%= @output.script %></p>
-        <p><c class="text-decoration-underline fw-bold">Font Size:  </c> <%= @output.font_size %></p>
-        <p><c class="text-decoration-underline fw-bold">Font Family:  </c> <%= @output.font_family %></p>
-        <p><c class="text-decoration-underline fw-bold">Font Style:  </c><%= @output.font_style %></p>
-        <p><c class="text-decoration-underline fw-bold">Voice Selected:  </c><%= @output.voice %></p>
-        <div class="button_container d-flex justify-content-around border-0">
-          <%= link_to '/', class: 'show-link yt' do %><i class="fa-brands fa-youtube"></i><% end %>
-          <%= link_to '/', class: 'show-link insta' do %><i class="fa-brands fa-instagram"></i><% end %>
-          <%= link_to '/', class: 'show-link tiktok' do %><i class="fa-brands fa-tiktok"></i><% end %>
-          <%= link_to @output.url, class: 'show-link download', download: @output.url do %><i class="fa-solid fa-download"></i><% end %>
-        </div>
-      </div>
-      <div class="col-4 border border-light rounded p-3">
-        <h2 class="text-decoration-underline">Sharing Suggestions</h2>
-        <p><c class="text-decoration-underline fw-bold">Suggested Video Title:  </c><%= @output.suggested_title %></p>
-        <p><c class="text-decoration-underline fw-bold">Suggested Video Description:  </c> <%= @output.suggested_description %></p>
-        <p><c class="text-decoration-underline fw-bold">Suggested Hashtags:  </c> <%= @output.suggested_hashtags %></p>
       </div>
     </div>
   </div>

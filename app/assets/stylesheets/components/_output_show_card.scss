@@ -4,9 +4,11 @@
   position: relative;
   transition: all 1500ms ease; /* Apply transition to the main button state */
 
+
+
   video {
-    width: 200px; /* Ensure the video fills the width of its container */
-    height: 360px; /* Calculate height based on 9:16 aspect ratio */
+    width: 280px; /* Ensure the video fills the width of its container */
+    height: 560px; /* Calculate height based on 9:16 aspect ratio */
     object-fit: cover;
     border-radius: 16px;
   }
@@ -57,3 +59,12 @@
         text-shadow: 1px 1px 10px rgba(101, 121, 118, 0.6);
       }
     }
+
+.text-card {
+  margin-top: 32px;
+
+  .card-header {
+    font-size: 24px;
+    color: #F4C644;
+  }
+}
