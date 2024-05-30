@@ -1,54 +1,19 @@
 <div class="container mt-5 text-white" data-controller="reddit-form">
   <div class="row">
-    <h1 class="text-center">Create a new Video</h1>
-    <div class="">
+    <div class="col-6">
       <%= form_with url: batches_reddit_path, method: :get, html: { data: { action: "change->reddit-form#fetch_backend" }, id: 'reddit' } do |f| %>
-        <div class="col-6">
-          <div class=" category-item">
-            <%= radio_button_tag(:query, 'stories', params[:query] == 'askreddit', class: "form-check-input check_boxes optional tag-selector", id: "stories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
-            <%= label_tag(:stories, 'r/Stories', class: "form-check-label collection_check_boxes") %>
-          </div>
-          <div class=" category-item">
-            <%= label_tag(:stories, 'r/Stories', class: "form-check-label collection_check_boxes") %>
-          </div>
-          <div class=" category-item">
-            <%= radio_button_tag(:query, 'stories', params[:query] == 'askreddit', class: "form-check-input check_boxes optional tag-selector", id: "stories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
-            <%= label_tag(:stories, 'r/Stories', class: "form-check-label collection_check_boxes") %>
-          </div>
-          <div class=" category-item">
-            <%= radio_button_tag(:query, 'stories', params[:query] == 'askreddit', class: "form-check-input check_boxes optional tag-selector", id: "stories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
-            <%= label_tag(:stories, 'r/Stories', class: "form-check-label collection_check_boxes") %>
-          </div>
-          <div class=" category-item">
-            <%= radio_button_tag(:query, 'stories', params[:query] == 'askreddit', class: "form-check-input check_boxes optional tag-selector", id: "stories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
-            <%= label_tag(:stories, 'r/Stories', class: "form-check-label collection_check_boxes") %>
-          </div>
-          <div class=" category-item">
-            <%= radio_button_tag(:query, 'stories', params[:query] == 'askreddit', class: "form-check-input check_boxes optional tag-selector", id: "stories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
-            <%= label_tag(:stories, 'r/Stories', class: "form-check-label collection_check_boxes") %>
-          </div>
-          <div class=" category-item">
-            <%= radio_button_tag(:query, 'stories', params[:query] == 'askreddit', class: "form-check-input check_boxes optional tag-selector", id: "stories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
-            <%= label_tag(:stories, 'r/Stories', class: "form-check-label collection_check_boxes") %>
-          </div>
-          <div class=" category-item">
-            <%= radio_button_tag(:query, 'stories', params[:query] == 'askreddit', class: "form-check-input check_boxes optional tag-selector", id: "stories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
-            <%= label_tag(:stories, 'r/Stories', class: "form-check-label collection_check_boxes") %>
-          </div>
+        <div class=" category-item">
+          <%= radio_button_tag(:query, 'stories', params[:query] == 'askreddit', class: "form-check-input check_boxes optional tag-selector", id: "stories", data: { action: "change->reddit-form#fetch_backend", reddit_form_target: "fsubmit" }) %>
+          <%= label_tag(:stories, 'r/Stories', class: "form-check-label collection_check_boxes") %>
         </div>
       <% end %>
     </div>
-  </div>
-  <div class="row">
-    <%= form_for(@batch) do |f| %>
-      <div class="col-6">
+    <div class="col-6 d-flex">
+      <%= form_for(@batch) do |f| %>
         <div data-reddit-form-target="stories">
         </div>
-      </div>
-      <%#= render 'pages/preview_card', video_source: 'https://res.cloudinary.com/dcug1pvpk/video/upload/v1716529190/lazyreel-seeds/story-video-1.mp4' %>
-      <div class="col-12">
         <%= f.submit "Submit", class: "btn btn-primary" %>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
