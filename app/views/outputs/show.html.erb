@@ -13,8 +13,8 @@
           <div class="col-8"></div>
           <div class="col-6 text-card">
             <h2 class="card-header">Video Details</h2>
-            <p><c class="text-decoration-underline fw-bold">Created on:  </c><%= @output.created_at %></p>
-            <p><c class="text-decoration-underline fw-bold">Script:  </c> <%= @output.script %></p>
+            <p><span class="text-decoration-underline fw-bold">Created on:  </span><%= @output.created_at %></p>
+            <p><span class="text-decoration-underline fw-bold">Script:  </span> <%= @output.script %></p>
             <div class="button_container d-flex justify-content-around border-0">
               <%= link_to '/', class: 'show-link yt' do %><i class="fa-brands fa-youtube"></i><% end %>
               <%= link_to '/', class: 'show-link insta' do %><i class="fa-brands fa-instagram"></i><% end %>
@@ -24,9 +24,9 @@
           </div>
           <div class="col-6 text-card">
             <h2 class="card-header">Sharing Suggestions</h2>
-            <p><c class="text-decoration-underline fw-bold">Suggested Video Title:  </c><%= @output.suggested_title %></p>
-            <p><c class="text-decoration-underline fw-bold">Suggested Video Description:  </c> <%= @output.suggested_description %></p>
-            <p><c class="text-decoration-underline fw-bold">Suggested Hashtags:  </c> <%= @output.suggested_hashtags %></p>
+            <p><span class="text-decoration-underline fw-bold">Suggested Video Title:  </span><%= @output.suggested_title %></p>
+            <p><span class="text-decoration-underline fw-bold">Suggested Video Description:  </span> <%= @output.suggested_description %></p>
+            <p><span class="text-decoration-underline fw-bold">Suggested Hashtags:  </span> <%= @output.suggested_hashtags %></p>
           </div>
         </div>
       </div>

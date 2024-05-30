@@ -3,7 +3,6 @@
     <div class="col-md-4 mb-4 position-relative label-icon">
       <%= check_box_tag "selected_posts[]", post[:content], false, id: "post_#{post[:id]}", class: 'form-check-input check_boxes optional r-tag-selector' %>
       <label for="post_<%= post[:id]%>" class='form-check-label collection_check_boxes'><%= truncate(post[:title], length: 80) %> </label>
-      <i class="fa-solid fa-book-open-reader icon-absolute" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
       <%#= label_tag "post_#{post[:id]}", truncate(post[:title], length: 80), class: 'form-check-label collection_check_boxes' %>
     </div>
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -26,3 +25,4 @@
   <% end %>
 </div>
 <!-- Modal -->
+<i class="fa-solid fa-book-open-reader " data-bs-toggle="modal" data-bs-target="#exampleModal"></i>

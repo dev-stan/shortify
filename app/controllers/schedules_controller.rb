@@ -11,10 +11,11 @@ class SchedulesController < ApplicationController
   def create
     @schedule = Schedule.new(schedule_params)
     @output = Output.find(params[:output_id])
-    @schedule.output = @output
+    @schedule.output = @output.url
     if @schedule.save
       redirect_to output_schedules_path
       puts 'saved'
+
     else
       render 'pages/home', status: :unprocessable_entity
       puts 'not saved'
