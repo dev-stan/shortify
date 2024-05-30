@@ -1,8 +1,7 @@
 .examples_card {
-  margin-left: 20px;
-  margin-right: 20px;
   position: relative;
   transition: all 1500ms ease; /* Apply transition to the main button state */
+
 
   .card {
     overflow: hidden;
@@ -14,5 +13,29 @@
     height: 360px; /* Calculate height based on 9:16 aspect ratio */
     object-fit: cover;
     border-radius: 16px;
+  }
+}
+
+.example-preview{
+   position: relative;
+}
+.preview{
+  box-shadow: #f4c644 0px 0px 5px 0px, rgba(244, 198, 68, 0.5) 0px 0px 1px 0px;
+  border-radius: 0 !important;
+}
+.tiktok-icons{
+  position:absolute;
+  bottom: 20px;
+  right: 5px;
+  color: white;
+  text-align: center;
+  img{
+    height: 24px;
+    border-radius: 50%;
+    border: solid white 1px;
+  }
+  p{
+    font-size: 8px;
+    margin: 0;
   }
 }

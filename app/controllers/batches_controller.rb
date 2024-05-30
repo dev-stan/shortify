@@ -49,6 +49,7 @@ class BatchesController < ApplicationController
         # @output.script = GenerateVideo.new(script).final_video_link
         @output.user = current_user
         @output.save!
+
       end
 
       redirect_to batch_path(@batch)
