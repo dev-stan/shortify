@@ -2,22 +2,29 @@
   display: inline-block;
 }
 
+
 .tag-selector {
   position: absolute;
   transform: scale(0);
 }
 
 .tag-selector + label {
+  margin-right: 20px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   cursor: pointer;
-  display: inline-block;
-  font-size: 0.7rem;
-  border-radius: 50rem;
-  padding: 0.1rem 0.5rem;
-  background-color: #ECEAFF;
-  color: #7E73FF;
-  border: 1px solid #7E73FF;
-  margin-right: 0.6rem;
-  margin-bottom: 0.4rem;
+  border-radius: 24px;
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  border: 3px solid white;
+  width: 100px;
+  height: 50px;
 }
 
 .tag-selector:checked + label {
