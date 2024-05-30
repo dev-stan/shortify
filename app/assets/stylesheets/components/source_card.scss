@@ -2,8 +2,8 @@
   position: relative;
 
   video {
-    width: 200px; /* Ensure the video fills the width of its container */
-    height: 376px; /* Calculate height based on 9:16 aspect ratio */
+    width: 150px; /* Ensure the video fills the width of its container */
+    height: auto; /* Calculate height based on 9:16 aspect ratio */
     border-radius: 6px;
     object-fit: cover;
 
@@ -12,5 +12,8 @@
   .card {
     overflow: hidden;
     border-radius: 16px;
+  }
+  :hover {
+    transform: scale(1.1);
   }
 }

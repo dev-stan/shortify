@@ -59,14 +59,15 @@
   font-size: 12px;
   text-align: left;
   padding: 6px;
-  padding-left: 4px;
-  padding-right: 4px;
   margin: 4px;
-  border: 3px solid #6b6b6b;
-  border-radius: 8px;
+  border: 3px solid #F9F6E0;
+  border-radius: 24px;
+  white-space: nowrap;
+  background-color: #F9F6E0;
+  color: black;
 }
 
 .voice-selector:checked + label {
-  border: 3px solid #ba3bd0;
+  border: 2px solid #F4C644;
   border-radius: 8px;
 }

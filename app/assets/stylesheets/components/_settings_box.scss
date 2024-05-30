@@ -1,6 +1,6 @@
 .settings-box {
   gap: 10px;
-  border: 2px solid #6b6b6b6e;
+  border: 2px solid white;
   border-radius: 16px;
   padding: 24px;
 }
@@ -10,25 +10,25 @@
   border-radius: 16px;
   background: #050c2c;
   resize: none;
-  color: white;
+  color: #F9F6E0;
 
   &:focus {
     border: 0px solid #6B6B6B;
     border-radius: 16px;
     background: #050c2c;
     resize: none;
-    color: white;
+    color: #F9F6E0;
   }
 }
 
 .choice-input {
   border: 0px solid #6B6B6B;
   border-radius: 16px;
-  background: #050c2c;
+  background: #F9F6E0;
 }
 
 .label-text {
-  color: rgba(255, 255, 255, 0.71);
+  color: #F9F6E0;
   font-size: 14px;
   font-weight: 600;
 }

@@ -109,3 +109,67 @@
 .cal-btn-2:not([disabled]):hover {
   box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(244, 198, 68, .5), .125rem .125rem 1rem rgba(244, 198, 68, .5);
 }
+
+
+.btn-3 {
+  background: #E4E1CD;
+  border: 0;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 500;
+  outline: transparent;
+  text-align: center;
+  text-decoration: none;
+  transition: box-shadow .2s ease-in-out;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: nowrap;
+  padding: 5 10px !important;
+}
+.btn-4 {
+  text-decoration: none;
+  max-width: 100%;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: backgbtn-4-color .2s;
+  text-align: center;
+  background-color: #F4C644;
+  border: 1px solid #f4c644;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color:black;
+  border-radius: 24px;
+}
+
+.btn-4:hover {
+  background: #E4E1CD;
+  color: #000000;
+  text-decoration: none;
+
+}
+
+.btn-cancel {
+  text-decoration: none;
+  max-width: 100%;
+  text-transform: uppercase;
+  font-weight: 500;
+  transition: backgbtn-4-color .2s;
+  text-align: center;
+  border: 1px solid #f4c644;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  color:#F4C644;
+  border-radius: 24px;
+  margin-right: 10px;
+}
+
+.btn-cancel:hover {
+  background: #F4C644;
+  color: #000000;
+  text-decoration: none;
+
+}
