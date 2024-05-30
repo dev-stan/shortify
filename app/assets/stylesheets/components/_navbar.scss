@@ -1,16 +1,23 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: #131213;
+  background: black;
+  font-weight: bold;
+  .logo {
+    font-size: 34px;
+    font-weight: bold;
+    color: #E4E1CD;
+  }
 
   .button {
     width: 10%;
     height: 40px;
+    font-weight: 500;
     border: 2px #F4C644;
     font-weight: bold;
     border-radius: 24px;
     background: #E4E1CD;
     color: black;
-    padding: 10px 30px 10px 30px;
+    padding: 10px 20px 10px 20px;
     text-decoration: none;
     margin: 5px;
 
@@ -30,25 +37,20 @@
 
   .button2 {
     width: 10%;
+    font-weight: 500;
     height: 40px;
     border: 2px #F4C644;
-    font-weight: bold;
     border-radius: 24px;
     background: #060508!important;
     color: #F4C644;
-    padding: 10px 30px 10px 30px;
+    padding: 10px 20px 10px 20px;
     text-decoration: none;
-    margin: 5px;
+    margin: 3px;
     transition: all 1500ms ease;
       &:hover {
         transition-duration: 500ms;
         color: #E4E1CD;
     }
-  }
-
-  a {
-    color: #E4E1CD;
-    font-weight: 500;
   }
 }
 
@@ -57,7 +59,7 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 220px;
+  width: 40px;
 }
 
 .unique-class {
