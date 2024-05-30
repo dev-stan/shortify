@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_05_29_091058) do
+ActiveRecord::Schema[7.1].define(version: 2024_05_30_004540) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -65,6 +65,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_05_29_091058) do
     t.integer "font_size"
     t.string "font_style"
     t.bigint "batch_id", null: false
+    t.string "suggested_title"
+    t.string "suggested_description"
+    t.string "suggested_hashtags"
     t.index ["batch_id"], name: "index_outputs_on_batch_id"
     t.index ["source_id"], name: "index_outputs_on_source_id"
     t.index ["user_id"], name: "index_outputs_on_user_id"
