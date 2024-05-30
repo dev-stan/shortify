@@ -1,6 +1,6 @@
 <h1>Your Videos:</h1>
 <div class="container d-flex mb-6" data-controller="video">
   <% @outputs.each do |output|%>
-    <%= link_to output_path(output) do %> <%= render 'output_card', source: output.url, output: output %> <% end %>
+    <%= link_to output_path(output) do %> <%= render 'output_card', output: output %> <% end %>
   <% end %>
 </div>

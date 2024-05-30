@@ -1,11 +1,25 @@
 <div class="d-flex">
   <div class="output_card">
-    <%= video_tag source, height: 1080, width: 1920, controls: false, autoplay: false, muted: true, data: {action: "mouseover->video#play"} %>
+    <% if output.url.present? %>
+      <%= video_tag output.url, height: 1080, width: 1920, controls: false, autoplay: false, muted: true, data: { action: "mouseover->video#play" } %>
+    <% else %>
+      <p>Video URL is missing.</p>
+    <% end %>
     <div class="button_container d-flex justify-content-center border-0">
-      <%= link_to '/', class: 'link yt' do %><i class="fa-brands fa-youtube"></i><% end %>
-      <%= link_to '/', class: 'link insta' do %><i class="fa-brands fa-instagram"></i><% end %>
-      <%= link_to '/', class: 'link tiktok' do %><i class="fa-brands fa-tiktok"></i><% end %>
-      <%= link_to output.url, class: 'link download', download: output.url do %><i class="fa-solid fa-download"></i><% end %>
+      <%= link_to '/', class: 'link yt' do %>
+        <i class="fa-brands fa-youtube"></i>
+      <% end %>
+      <%= link_to '/', class: 'link insta' do %>
+        <i class="fa-brands fa-instagram"></i>
+      <% end %>
+      <%= link_to '/', class: 'link tiktok' do %>
+        <i class="fa-brands fa-tiktok"></i>
+      <% end %>
+      <% if output.url.present? %>
+        <%= link_to output.url, class: 'link download', download: output.url do %>
+          <i class="fa-solid fa-download"></i>
+        <% end %>
+      <% end %>
     </div>
   </div>
 </div>
