@@ -29,7 +29,7 @@ class BatchesController < ApplicationController
         # Assuming GenerateVideo.new returns an object with a final_video_link method
         #generated_video = GenerateVideo.new(output.source.video.url, output.script)
         #generated_video = GenerateVideoJob.perform_later(output.source.video.url, output.script)
-        output.url = GenerateVideoJob.perform_later(output.source.video.url, output.script)
+        output.url = GenerateVideoJob.perform_later(output.source.video.url, output.script, output)
         chaptgpt_response_title = @client.chat(parameters: {
           model: "gpt-3.5-turbo",
           messages: [{ role: "user", content: "Give me a short, effective video title for the following script: #{output.script}'."}]
