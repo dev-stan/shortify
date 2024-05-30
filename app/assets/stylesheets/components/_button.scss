@@ -3,7 +3,7 @@
   width: 10%;
   height: 40px;
   border-radius: 30px;
-  background: black !important;
+  background: black;
   color: #F4C644;
   padding: 20px 50px 20px 50px;
   text-decoration: none;
@@ -27,7 +27,7 @@
 
 .cal-btn {
   width: 100%;
-  height: 40px;
+  border: 0;
   font-weight: bold;
   border-radius: 12px;
   background: #E4E1CD;
@@ -74,7 +74,6 @@
 .cal-btn-2 {
   font-weight: bold;
   border: 0;
-  height: 40px;
   border-radius: 12px;
   color: #F4C644;
   cursor: pointer;
@@ -92,12 +91,21 @@
 }
 
 .modal-btn {
-  width: 40%;
-  height: 40px;
   font-weight: bold;
+  border: 0;
   border-radius: 12px;
-  background: #F4C644;
+  background-color: #F4C644;
   color: black;
+  cursor: pointer;
+  display: inline-block;
   padding: 10px 20px 10px 20px;
   text-decoration: none;
+}
+
+.cal-btn-2:not([disabled]):focus {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(244, 198, 68, .5), .125rem .125rem 1rem rgba(244, 198, 68, .5);
+}
+
+.cal-btn-2:not([disabled]):hover {
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(244, 198, 68, .5), .125rem .125rem 1rem rgba(244, 198, 68, .5);
 }

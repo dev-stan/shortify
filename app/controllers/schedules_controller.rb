@@ -1,7 +1,8 @@
 class SchedulesController < ApplicationController
   def index
+
     start_date =  params.fetch(:start_date, Date.today).to_date
-    @schedules = Schedule.where(starts_at: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
+    @schedules = Schedule.where(publish_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
   end
   def new
     @schedule = Schedule.new
@@ -9,8 +10,10 @@ class SchedulesController < ApplicationController
   end
   def create
     @schedule = Schedule.new(schedule_params)
+    @output = Output.find(params[:output_id])
+    @schedule.output = @output
     if @schedule.save
-      redirect_to source_path(@schedule)
+      redirect_to output_schedules_path
       puts 'saved'
     else
       render 'pages/home', status: :unprocessable_entity

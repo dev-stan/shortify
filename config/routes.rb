@@ -14,6 +14,7 @@ resources :sources, only: [:index]
 resources :outputs, only: [:index, :show, :new, :create] do
   resources :schedules, only: [:create]
 end
+resources :schedules, only: [:index]
 get '/download_video', to: 'outputs#download', as: 'download_video'
 
 end
