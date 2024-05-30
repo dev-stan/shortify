@@ -1,14 +1,16 @@
 .next-button {
+  border: none;
   font-weight: 600;
-  width: 10%;
+  width: 20%;
   height: 40px;
   border-radius: 30px;
-  background: black;
-  color: #F4C644;
-  padding: 20px 50px 20px 50px;
+  background: #F4C644;
+  color: #131213;
   text-decoration: none;
-  margin: 5px;
-  border: solid #F4C644 1px;
   text-align: center;
-  // transition: all 2500ms ease; /* Apply transition to the main button state */
+  transition: all 2500ms ease; /* Apply transition to the main button state */
+}
+
+.next-button:hover {
+  transform: scale(1.1);
 }

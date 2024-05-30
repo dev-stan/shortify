@@ -22,12 +22,34 @@
   border-radius: 24px;
   background-color: #E4E1CD;
   color: #131213;
-  border: 1px solid #131213;;
+  border: 1px solid #131213;
   height: 40px;
   transition: all 1500ms ease; /* Apply transition to the main button state */
+}
+
+
+.label-icon {
+  i {
+    opacity: 0;
+    transition: opacity 1500ms ease; /* Apply transition to the opacity of the icon */
+  }
+  &:hover {
+    i {
+      opacity: 1;
+    }
+  }
 }
 
 .tag-selector:checked + label {
   background-color: #F4C644;
   color: #131213;
+}
+
+.icon-absolute {
+  position: absolute;
+  top: 5%; /* Move up by 20 pixels */
+  left: 20px;
+  font-size: 30px;
+  color:#F4C644;
+  transition: all 2500ms ease; /* Apply transition to the main button state */
 }

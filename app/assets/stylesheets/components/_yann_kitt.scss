@@ -1,0 +1,72 @@
+.item-drawer {
+  /*fixed*/
+  display: flex;
+  align-items: center;
+  /*customizable*/
+  height: 120px;
+  width: 700px;
+  max-width: 100%;
+/*   width: fit-content; */
+  border-radius: 16px;
+  box-shadow: 0 0 16px rgba(0,0,0,0.3);
+  background-color: rgb(250,250,250);
+}
+
+.item-drawer h2 {
+  /*customizable*/
+  margin: 0;
+}
+
+.item-drawer-content {
+  /*fixed*/
+  flex-grow: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  /*customizable*/
+  padding: 0 32px;
+}
+
+.item-drawer-settings {
+  /*fixed*/
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0px;
+  height: 100%;
+  /*customizable*/
+  transition: 0.3s ease-out;
+  background-color: rgb(230,230,230);
+  border-radius: 0 16px 16px 0;
+  font-size: 40px;
+}
+
+.item-drawer-button {
+  /*fixed*/
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  cursor: pointer;
+  /*customizable*/
+  background-color: #a4beff;
+  border-radius: 0 16px 16px 0;
+  width: 40px;
+  font-size: 40px;
+}
+
+.item-drawer-settings a {
+  /*customizable*/
+  color: rgb(40,40,40);
+}
+
+.item-drawer.active .item-drawer-settings {
+  /*customizable*/
+  width: 180px;
+}
+
+.item-drawer.active .item-drawer-button {
+  /*fixed*/
+  border-radius: 0;
+}
