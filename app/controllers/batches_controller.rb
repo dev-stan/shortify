@@ -37,7 +37,7 @@ class BatchesController < ApplicationController
 
         chaptgpt_response_description = @client.chat(parameters: {
           model: "gpt-3.5-turbo",
-          messages: [{ role: "user", content: "Give me an effective video description (one paragraph) for the following script: #{output.script}'."}]
+          messages: [{ role: "user", content: "Give me an one sentence video description for the following script: #{output.script}'."}]
          })
         output.suggested_description = chaptgpt_response_description["choices"][0]["message"]["content"]
 
