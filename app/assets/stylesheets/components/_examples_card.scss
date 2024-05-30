@@ -18,10 +18,11 @@
 
 .example-preview{
    position: relative;
-}
-.preview{
-  box-shadow: #f4c644 0px 0px 5px 0px, rgba(244, 198, 68, 0.5) 0px 0px 1px 0px;
+   box-shadow: #f4c644 0px 0px 5px 0px, rgba(244, 198, 68, 0.5) 0px 0px 1px 0px;
   border-radius: 0 !important;
+  video{
+    border-radius: 0 !important;
+  }
 }
 .tiktok-icons{
   position:absolute;
