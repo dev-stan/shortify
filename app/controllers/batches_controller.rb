@@ -80,6 +80,7 @@ class BatchesController < ApplicationController
   def new
     @user = current_user
     @batch = Batch.new
+    @subs = ['Stories', 'todayilearned', 'aita', 'todayilearned', 'ExplainLikeImFive', 'Showerthoughts', 'Jokes', 'LifeProTips', 'nottheonion']
   end
 
 private
