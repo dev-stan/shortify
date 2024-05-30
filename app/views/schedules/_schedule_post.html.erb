@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
-<button type="button" class="cal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Schedule a Post
+<button type="button" class="modal-btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Schedule for Posting
 </button>
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -13,7 +13,7 @@
       <div class="modal-body">
         <p>Schedule your post for the times when your audience is most active, or manually select a date and time in the future to publish your post.</p>
         <%= simple_form_for([output, schedule], data: { controller: 'flatpickr' }) do |f| %>
-          <div class="d-flex bg-light border rounded-4">
+
             <%= f.input :publish_time,
                 placeholder: Date.today.to_s,
                 as: :string,
@@ -28,17 +28,12 @@
                   min: Date.today
                 },
                 wrapper_html: {
-                  class: 'mb-0 pb-3 border-end',
+                  # class: 'mb-0 pb-3 border-end',
                   style: 'margin-bottom: 0 !important'
                 } %>
           </div>
-          <%= f.submit 'Post', class: 'btn-1' %>
+          <%= f.submit 'Save', class: 'modal-btn col-3 justify-content-center' %>
         <% end %>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn-1" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn-1">Save changes</button>
       </div>
     </div>
   </div>
-</div>

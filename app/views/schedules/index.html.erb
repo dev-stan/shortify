@@ -1,0 +1,11 @@
+<div class="container">
+  <%= month_calendar(events: @schedules, attribute: :publish_time) do |date, schedules| %>
+    <%= date %>
+    <% schedules.each do |schedule| %>
+      <div class='schedule'>
+        <%= schedule.output %>
+        <%= schedule.publish_time %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

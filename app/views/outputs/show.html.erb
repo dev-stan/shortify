@@ -21,8 +21,11 @@
       <div class="col-4 mt-3">
         <%= render 'output_show_card', source: @output.url, output: @output %>
       </div>
-      <div class="col-4 border border-light rounded p-3">
-        <h2 class="text-decoration-underline">Video Details</h2>
+      <div class="col-6 border border-light rounded p-3">
+        <div class="col-6">
+          <%= render 'schedules/schedule_post', schedule: @schedule, output: @output %>
+        </div>
+        <h2 class="text-decoration-underline mt-2">Video Details</h2>
         <p><c class="text-decoration-underline fw-bold">Created on:  </c><%= @output.created_at %></p>
         <p><c class="text-decoration-underline fw-bold">Script:  </c> <%= @output.script %></p>
         <p><c class="text-decoration-underline fw-bold">Font Size:  </c> <%= @output.font_size %></p>
@@ -44,15 +47,4 @@
       </div>
     </div>
   </div>
-</div>
-<div class="container">
-  <%= month_calendar(events: @schedules) do |date, schedules| %>
-    <%= date %>
-    <% schedules.each do |schedule| %>
-      <div class='schedule'>
-        <%= schedule.output %>
-        <%= schedule.platform %>
-      </div>
-    <% end %>
-  <% end %>
 </div>

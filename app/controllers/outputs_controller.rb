@@ -32,6 +32,8 @@ end
   def show
     @output = Output.find(params[:id])
     @schedule = Schedule.new
+    start_date =  params.fetch(:start_date, Date.today).to_date
+    @schedules = Schedule.where(publish_time: start_date.beginning_of_month.beginning_of_week..start_date.end_of_month.end_of_week)
   end
 
   def download
