@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   get '/privacy', to: 'pages#privacy'
   get "up" => "rails/health#show", as: :rails_health_check
 
+  resources :batches, only: [:update, :edit, :new, :create, :show]
+
   resources :outputs, only: [:index, :show, :new, :create] do
     resources :schedules, only: [:create]
   end
