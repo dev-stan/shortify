@@ -11,30 +11,30 @@ end
   end
 
   def create
-    @client = OpenAI::Client.new
+    # @client = OpenAI::Client.new
     params[:selected_posts].each do |script|
       @output = Output.new(source: Source.first) #@output = Output.new(output_params)
       @output.script = script
       # @output.script = GenerateVideo.new(script).final_video_link
       @output.user = current_user
 
-      chaptgpt_response_title = client.chat(parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: "Give me a short, effective video title for the following script: #{@output.script}'."}]
-      })
-      @output.suggested_title = chaptgpt_response_title["choices"][0]["message"]["content"]
+      # chaptgpt_response_title = client.chat(parameters: {
+      #   model: "gpt-3.5-turbo",
+      #   messages: [{ role: "user", content: "Give me a short, effective video title for the following script: #{@output.script}'."}]
+      # })
+      # @output.suggested_title = chaptgpt_response_title["choices"][0]["message"]["content"]
 
-      chaptgpt_response_description = client.chat(parameters: {
-        model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: "Give me an effective video description (one paragraph) for the following script: #{@output.script}'."}]
-       })
-      @output.suggested_description = chaptgpt_response_description["choices"][0]["message"]["content"]
+      # chaptgpt_response_description = client.chat(parameters: {
+      #   model: "gpt-3.5-turbo",
+      #   messages: [{ role: "user", content: "Give me an effective video description (one paragraph) for the following script: #{@output.script}'."}]
+      #  })
+      # @output.suggested_description = chaptgpt_response_description["choices"][0]["message"]["content"]
 
-       chaptgpt_response_hashtags = client.chat(parameters: {
-         model: "gpt-3.5-turbo",
-        messages: [{ role: "user", content: "Give me a set of hashtags based on the content of the following script: #{@output.script}'."}]
-      })
-      @output.suggested_hashtags = chaptgpt_response_hashtags["choices"][0]["message"]["content"]
+      #  chaptgpt_response_hashtags = client.chat(parameters: {
+      #    model: "gpt-3.5-turbo",
+      #   messages: [{ role: "user", content: "Give me a set of hashtags based on the content of the following script: #{@output.script}'."}]
+      # })
+      # @output.suggested_hashtags = chaptgpt_response_hashtags["choices"][0]["message"]["content"]
 
       if @output.save
         puts 'saved'

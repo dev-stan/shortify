@@ -23,11 +23,30 @@ class BatchesController < ApplicationController
 
   def update
     @batch = Batch.find(params[:id])
+    @client = OpenAI::Client.new
     if @batch.update(batch_params)
       @batch.outputs.each do |output|
         # Assuming GenerateVideo.new returns an object with a final_video_link method
         generated_video = GenerateVideo.new(output.source.video.url, output.script)
         output.url = generated_video.final_video_link
+        chaptgpt_response_title = @client.chat(parameters: {
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: "Give me a short, effective video title for the following script: #{output.script}'."}]
+        })
+        output.suggested_title = chaptgpt_response_title["choices"][0]["message"]["content"]
+
+        chaptgpt_response_description = @client.chat(parameters: {
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: "Give me an effective video description (one paragraph) for the following script: #{output.script}'."}]
+         })
+        output.suggested_description = chaptgpt_response_description["choices"][0]["message"]["content"]
+
+         chaptgpt_response_hashtags = @client.chat(parameters: {
+           model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: "Give me a set of hashtags based on the content of the following script: #{output.script}'."}]
+        })
+        output.suggested_hashtags = chaptgpt_response_hashtags["choices"][0]["message"]["content"]
+
         output.save! # Ensure to save the changes
       end
       redirect_to batch_path(@batch)
