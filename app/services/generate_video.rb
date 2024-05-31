@@ -252,13 +252,16 @@ class GenerateVideo
     result = JSON.parse(RestClient.get("https://api.shotstack.io/create/stage/assets/#{audio_id}",
                                        @headers))
     status = result["data"]["attributes"]["status"]
+    retries = 10
+    counter = 1
     if status == "done"
       return mp3_url = result["data"]["attributes"]["url"]
     else
-      while status != "done"
+      while status != "done" && counter < retries
+        counter += 1
         result = JSON.parse(RestClient.get("https://api.shotstack.io/create/stage/assets/#{audio_id}", @headers))
-        p status
-        sleep 2
+        p status = result["data"]["attributes"]["status"]
+        sleep 5
         p "processing speech result...."
         if status == "done"
           mp3_url = result["data"]["attributes"]["url"]
