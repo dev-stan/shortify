@@ -23,13 +23,14 @@ class BatchesController < ApplicationController
 
   def update
     @batch = Batch.find(params[:id])
+    @source = Source.find(params[:output][:source_id])
     @client = OpenAI::Client.new
     if @batch.update(batch_params)
       @batch.outputs.each do |output|
         # Assuming GenerateVideo.new returns an object with a final_video_link method
         #generated_video = GenerateVideo.new(output.source.video.url, output.script)
         #generated_video = GenerateVideoJob.perform_later(output.source.video.url, output.script)
-        output.url = GenerateVideoJob.perform_later(output.source.video.url, output.script, output)
+        output.url = GenerateVideoJob.perform_later(@source.video.url, output.script, output)
         chaptgpt_response_title = @client.chat(parameters: {
           model: "gpt-3.5-turbo",
           messages: [{ role: "user", content: "Give me a short, effective video title for the following script: #{output.script}'."}]
@@ -59,13 +60,13 @@ class BatchesController < ApplicationController
   def create
     @owner = current_user
     @batch = Batch.new
-    @batch.source = Source.last
+    @batch.source = Source.all.sample
     if @batch.save
       params[:selected_posts].each do |script|
         @output = Output.new #@output = Output.new(output_params)
         @output.batch = @batch
         @output.script = script
-        @output.source = Source.last
+        @output.source = Source.first
         # @output.script = GenerateVideo.new(script).final_video_link
         @output.user = current_user
         @output.save!
@@ -88,6 +89,6 @@ class BatchesController < ApplicationController
 private
 
   def batch_params
-    params.require(:batch).permit(:font_family, :font_size, :font_style)
+    params.require(:batch).permit(:font_family, :font_size, :font_style, :source_id)
   end
 end
