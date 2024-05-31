@@ -14,6 +14,9 @@
 .category-selector {
   position: absolute;
   transform: scale(0);
+  &:hover {
+    transform: scale(1.0);
+  }
 }
 
 .category-selector + label {
@@ -22,13 +25,17 @@
   font-size: 12px;
   text-align: left;
 }
-.category-selector:checked + label{
-  transition-duration: 500ms;
-  transform: scale(1.0);
-  &:hover {
-    transform: scale(1.0);
-  }
-}
+// .category-selector:checked + label{
+//   transition-duration: 100ms;
+//   transform: scale(1.0);
+//   border: 2px solid #F4C644;
+//   border-radius: 24px;
+//   &:hover {
+//     transform: scale(1.0);
+
+
+//   }
+// }
 
 // .category-selector:checked + label {
 //   height: 98.5%;
@@ -69,5 +76,5 @@
 
 .voice-selector:checked + label {
   border: 2px solid #F4C644;
-  border-radius: 8px;
+  border-radius: 24px;
 }

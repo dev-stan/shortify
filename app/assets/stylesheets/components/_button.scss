@@ -126,7 +126,7 @@
   -webkit-user-select: none;
   touch-action: manipulation;
   white-space: nowrap;
-  padding: 5 10px !important;
+  padding: 10px 10px !important;
 }
 .btn-4 {
   text-decoration: none;
@@ -142,6 +142,7 @@
   display: flex;
   color:black;
   border-radius: 24px;
+  padding: 5px 10px !important;
 }
 
 .btn-4:hover {

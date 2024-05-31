@@ -6,7 +6,6 @@
     height: auto; /* Calculate height based on 9:16 aspect ratio */
     border-radius: 6px;
     object-fit: cover;
-
   }
 
   .card {
@@ -15,5 +14,21 @@
   }
   :hover {
     transform: scale(1.1);
+    transition-duration: 100ms;
+  }
+
+}
+
+.category-selector:checked + label {
+  border-radius: 24px;
+  video{
+    border: 2px solid #F4C644;
+    transform: scale(1.1);
+  }
+}
+
+.choice-input option{
+  :hover{
+  box-shadow: 0 0 10px 100px #F4C644;
   }
 }
