@@ -1,7 +1,9 @@
 .output_card {
   position: relative;
   transition: all 1500ms ease; /* Apply transition to the main button state */
-
+  p{
+    text-decoration: none !important;
+  }
   video {
     width: 200px; /* Ensure the video fills the width of its container */
     height: 360px; /* Calculate height based on 9:16 aspect ratio */
@@ -63,5 +65,5 @@
   height: 360px; /* Calculate height based on 9:16 aspect ratio */
   border-radius: 16px;
   background: rgb(63, 63, 63);
-  text-decoration: none;
+
 }
