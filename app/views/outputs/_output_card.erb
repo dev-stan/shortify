@@ -3,7 +3,10 @@
     <% if output.url.present? && output.url.end_with?('.mp4') %>
       <%= video_tag output.url, height: 1080, width: 1920, controls: false, autoplay: false, muted: true, data: { action: "mouseover->video#play" } %>
     <% else %>
-      <p>Video URL is missing.</p>
+    <div class="fake-output">
+      <p>Loading...</p>
+    </div>
+
     <% end %>
     <div class="button_container d-flex justify-content-center border-0">
       <%= link_to '/', class: 'link yt' do %>

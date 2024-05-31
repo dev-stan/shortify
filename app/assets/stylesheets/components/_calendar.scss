@@ -15,3 +15,17 @@
   color:#F4C644;
   font-weight: bold;
 }
+
+.schedule {
+  color: black;
+  padding: 2px 2px;
+  border-radius: 4px;
+  background: #F4C644;
+  transition: background 0.3s ease;
+}
+
+.schedule:hover {
+  background: #E4E1CD;
+  color: black;
+  cursor: pointer;
+}
