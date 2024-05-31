@@ -1,6 +1,4 @@
 .output_card {
-  margin-left: 20px;
-  margin-right: 20px;
   position: relative;
   transition: all 1500ms ease; /* Apply transition to the main button state */
 
@@ -27,32 +25,43 @@
     margin-inline: 8px;
     color: rgb(103, 103, 103);
   }
-    .yt {
-      &:hover {
-        color: red;
-        transition-duration: 500ms;
-        text-shadow: 1px 1px 10px rgba(253, 47, 47, 0.6);
-      }
-    }
-    .insta {
-      &:hover {
-        color: rgb(187, 0, 255);
-        transition-duration: 500ms;
-        text-shadow: 1px 1px 10px rgba(143, 16, 145, 0.6);
-      }
-    }
-    .tiktok {
-      &:hover {
-        color: rgb(0, 255, 242);
-        transition-duration: 500ms;
-        text-shadow: 1px 1px 10px rgba(44, 139, 126, 0.6);
-      }
-    }
-    .download {
-      &:hover {
-        color: rgb(181, 181, 181);
-        transition-duration: 500ms;
-        text-shadow: 1px 1px 10px rgba(101, 121, 118, 0.6);
-      }
+  .yt {
+    &:hover {
+      color: rgb(206, 4, 4);
+      transition-duration: 500ms;
+      text-shadow: 1px 1px 10px rgba(253, 47, 47, 0.6);
     }
   }
+  .insta {
+    &:hover {
+      color: rgb(188, 50, 238);
+      transition-duration: 500ms;
+      text-shadow: 1px 1px 10px rgba(143, 16, 145, 0.6);
+    }
+  }
+  .tiktok {
+    &:hover {
+      color: rgba(20, 218, 208, 0.785);
+      transition-duration: 500ms;
+      text-shadow: 1px 1px 10px rgba(44, 139, 126, 0.6);
+    }
+  }
+  .download {
+    &:hover {
+      color: #F4C644;
+      transition-duration: 500ms;
+      text-shadow: 1px 1px 10px rgba(101, 121, 118, 0.6);
+    }
+  }
+}
+
+.fake-output {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px; /* Ensure the video fills the width of its container */
+  height: 360px; /* Calculate height based on 9:16 aspect ratio */
+  border-radius: 16px;
+  background: rgb(63, 63, 63);
+  text-decoration: none;
+}
