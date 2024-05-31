@@ -1,0 +1,75 @@
+<div class="container mt-3 mb-5">
+  <%= simple_form_for @batch do |f| %>
+    <div class="row">
+      <div class="col-6">
+        <h1 style="font-size: 50px">Choose your background video and settings...</h1>
+        <div class="d-flex justify-content-evenly mt-3">
+          <% @sources.each_with_index do |source, index| %>
+            <div class="category-item">
+              <input class="form-check-input radio_buttons required category-selector" type="radio" value="<%= source.id %>" name="output[source_id]" id="card-<%= index %>" data-action="change->reddit-form#fetch_backend">
+              <label class="form-check-label collection_radio_buttons" for="card-<%= index %>"><%= render "pages/source_card", source: source.video.key %></label>
+            </div>
+          <% end %>
+        </div>
+        <div class="row mt-3">
+          <div class="col-6">
+            <div class="label-text">
+              Font Size: <output id="rangevalue">12</output>
+              <%= f.input :font_size, label: false, as: :range, input_html: { value: 12, min: 1, max: 50, oninput: "rangevalue.value=value", class: "slider-input" } %>
+            </div>
+            <%= f.input :font_family, collection: Output::FONTFAMILIES, include_blank: false, wrapper: false, input_html: { class: "mb-3 choice-input" }, label_html: { class: "label-text" } %>
+          </div>
+          <div class="col-6">
+            <div class="d-flex mb-3">
+              <% Output::VOICES.each do |voice| %>
+                <div class="category-item">
+                  <%= radio_button_tag('output[voice]', voice, false, class: "form-check-input check_boxes optional tag-selector", id: voice, data: { action: "change->reddit-form#fetch_backend" }) %>
+                  <label class="form-check-label collection_check_boxes" for="<%= voice %>">Voice <%= voice %></label>
+                </div>
+              <% end %>
+            </div>
+            <%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false, wrapper: false, input_html: { class: "mb-3 choice-input" }, label_html: { class: "label-text mt-2" } %>
+          </div>
+        </div>
+      </div>
+      <div class="col-6">
+        <h2>Preview feed for</h2>
+        <div class="dropdown text-center mt-3">
+          <button class="btn-3 dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false", style="border-radius: 16px">
+            Tiktok
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Youtube</a></li>
+            <li><a class="dropdown-item" href="#">Tiktok</a></li>
+            <li><a class="dropdown-item" href="#">Instagram</a></li>
+          </ul>
+        </div>
+        <div class='d-flex flex-column justify-content-center align-items-center mt-4'>
+          <div class="example-preview" style="height: 360px;">
+            <%= render "pages/examples_card", video_source: "https://res.cloudinary.com/dcug1pvpk/video/upload/v1716529189/lazyreel-seeds/story-video-4.mp4"%>
+            <div class="tiktok-icons">
+              <div class="d-block">
+                <%= image_tag 'shortify-tiktok', alt: "text" %>
+              </div>
+              <div class="d-block"><i class="fa-solid fa-heart"></i>
+                <p>999</p>
+              </div>
+              <div class="d-block"><i class="fa-solid fa-comment-dots"></i>
+                <p>56</p>
+              </div>
+              <div class="d-block"><i class="fa-solid fa-bookmark"></i>
+                <p>159</p>
+              </div>
+              <div class="d-block"><i class="fa-solid fa-share"></i>
+                <p>99</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="d-flex justify-content-end">
+          <%= f.button :submit, " Create Video ", class: "next-button" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
