@@ -50,7 +50,7 @@ class BatchesController < ApplicationController
 
         output.save! # Ensure to save the changes
       end
-      redirect_to batch_path(@batch)
+      redirect_to outputs_path
     else
       render :edit, status: :unprocessable_entity
     end

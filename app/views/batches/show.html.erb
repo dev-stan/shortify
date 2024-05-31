@@ -31,7 +31,7 @@
             <%= f.input :font_style, collection: Output::FONTSTYLES, include_blank: false, wrapper: false, input_html: { class: "mb-3 choice-input", data: {action: 'change->overlay#fontstyle'} }, label_html: { class: "label-text mt-2" } %>
           </div>
           <div class="d-flex justify-content-end">
-            <%= f.button :submit, " Create Video ", class: "btn-4" %>
+            <input type="submit" name="commit" value=" Create Video" class="next-button" data-disable-with=" Create Video ">
           </div>
         </div>
       </div>
